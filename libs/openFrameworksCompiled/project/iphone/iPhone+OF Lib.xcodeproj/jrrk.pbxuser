@@ -1,0 +1,307 @@
+// !$*UTF8*$!
+{
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeArchitecturePreference = armv7;
+		activeBuildConfigurationName = Release;
+		activeSDKPreference = iphoneos3.2;
+		activeTarget = BB24DE5C10DA7A3F00E9C588 /* iPhone+OF Static Library */;
+		breakpoints = (
+			6A8AD31D11B78BA400FDD1D0 /* ofxiPhoneKeyboard.mm:142 */,
+			6A8AD33411B78CFE00FDD1D0 /* ofxiPhoneKeyboard.mm:200 */,
+			6A8AD33611B78D2600FDD1D0 /* ofxiPhoneKeyboard.mm:206 */,
+			6AE4943F12561BD00036271C /* ofGraphics.cpp:681 */,
+		);
+		codeSenseManager = 6AAA68C811B1394200525D43 /* Code sense */;
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					345,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					305,
+					60,
+					20,
+					48,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 307650919;
+			PBXWorkspaceStateSaveDate = 307650919;
+		};
+		perUserProjectItems = {
+			6A520EE71256918F00AD3EB1 /* PBXTextBookmark */ = 6A520EE71256918F00AD3EB1 /* PBXTextBookmark */;
+			6A520EEC1256918F00AD3EB1 /* PBXTextBookmark */ = 6A520EEC1256918F00AD3EB1 /* PBXTextBookmark */;
+			6A520EED1256918F00AD3EB1 /* PBXTextBookmark */ = 6A520EED1256918F00AD3EB1 /* PBXTextBookmark */;
+			6A520EEE1256918F00AD3EB1 /* PBXTextBookmark */ = 6A520EEE1256918F00AD3EB1 /* PBXTextBookmark */;
+			6A8AD31F11B78BB600FDD1D0 /* PBXTextBookmark */ = 6A8AD31F11B78BB600FDD1D0 /* PBXTextBookmark */;
+			6AE4954C1256436E0036271C /* PBXTextBookmark */ = 6AE4954C1256436E0036271C /* PBXTextBookmark */;
+			6AE495511256436E0036271C /* PBXTextBookmark */ = 6AE495511256436E0036271C /* PBXTextBookmark */;
+		};
+		sourceControlManager = 6AAA68C711B1394200525D43 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	6A520EE71256918F00AD3EB1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BB24DEFC10DA7BEF00E9C588 /* ofBaseApp.h */;
+		name = "ofBaseApp.h: 21";
+		rLen = 0;
+		rLoc = 405;
+		rType = 0;
+		vrLen = 534;
+		vrLoc = 0;
+	};
+	6A520EEC1256918F00AD3EB1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BB24DF0E10DA7BEF00E9C588 /* ofTrueTypeFont.cpp */;
+		name = "ofTrueTypeFont.cpp: 650";
+		rLen = 0;
+		rLoc = 20482;
+		rType = 0;
+		vrLen = 1760;
+		vrLoc = 18639;
+	};
+	6A520EED1256918F00AD3EB1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BB24DF0E10DA7BEF00E9C588 /* ofTrueTypeFont.cpp */;
+		name = "ofTrueTypeFont.cpp: 650";
+		rLen = 0;
+		rLoc = 20482;
+		rType = 0;
+		vrLen = 1760;
+		vrLoc = 18639;
+	};
+	6A520EEE1256918F00AD3EB1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 92BFCD061128AC3E0081DD61 /* ofBitmapFont.cpp */;
+		name = "ofBitmapFont.cpp: 2";
+		rLen = 26;
+		rLoc = 1;
+		rType = 0;
+		vrLen = 4973;
+		vrLoc = 0;
+	};
+	6A8AD31D11B78BA400FDD1D0 /* ofxiPhoneKeyboard.mm:142 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = BB24E03C10DA7C6100E9C588 /* ofxiPhoneKeyboard.mm */;
+		functionName = "-addtobuf:";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 142;
+		location = OcamlExample;
+		modificationTime = 307663131.328758;
+		originalNumberOfMultipleMatches = 1;
+		state = 2;
+	};
+	6A8AD31F11B78BB600FDD1D0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BB24E03C10DA7C6100E9C588 /* ofxiPhoneKeyboard.mm */;
+		name = "ofxiPhoneKeyboard.mm: 355";
+		rLen = 0;
+		rLoc = 9224;
+		rType = 0;
+		vrLen = 103;
+		vrLoc = 3156;
+	};
+	6A8AD33411B78CFE00FDD1D0 /* ofxiPhoneKeyboard.mm:200 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = BB24E03C10DA7C6100E9C588 /* ofxiPhoneKeyboard.mm */;
+		functionName = "-textField:shouldChangeCharactersInRange:replacementString:";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 200;
+		location = keyboardExample;
+		modificationTime = 307663131.328942;
+		originalNumberOfMultipleMatches = 1;
+		state = 2;
+	};
+	6A8AD33611B78D2600FDD1D0 /* ofxiPhoneKeyboard.mm:206 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = BB24E03C10DA7C6100E9C588 /* ofxiPhoneKeyboard.mm */;
+		functionName = "-textField:shouldChangeCharactersInRange:replacementString:";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 206;
+		location = keyboardExample;
+		modificationTime = 307663131.329126;
+		originalNumberOfMultipleMatches = 1;
+		state = 2;
+	};
+	6AAA68C711B1394200525D43 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	6AAA68C811B1394200525D43 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	6AE4943F12561BD00036271C /* ofGraphics.cpp:681 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = BB24DF0810DA7BEF00E9C588 /* ofGraphics.cpp */;
+		functionName = "ofDrawBitmapString(string textString, float x, float y)";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 681;
+		location = OcamlExample;
+		modificationTime = 307663131.329306;
+		originalNumberOfMultipleMatches = 1;
+		state = 2;
+	};
+	6AE4954C1256436E0036271C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BB24DEFC10DA7BEF00E9C588 /* ofBaseApp.h */;
+		name = "ofBaseApp.h: 21";
+		rLen = 0;
+		rLoc = 405;
+		rType = 0;
+		vrLen = 534;
+		vrLoc = 0;
+	};
+	6AE495511256436E0036271C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 92BFCD061128AC3E0081DD61 /* ofBitmapFont.cpp */;
+		name = "ofBitmapFont.cpp: 2";
+		rLen = 26;
+		rLoc = 1;
+		rType = 0;
+		vrLen = 4973;
+		vrLoc = 0;
+	};
+	92BFCD051128AC3E0081DD61 /* ofBitmapFont.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {740, 325}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 358}";
+			sepNavWindowFrame = "{{15, 129}, {1217, 1044}}";
+		};
+	};
+	92BFCD061128AC3E0081DD61 /* ofBitmapFont.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1158, 5902}}";
+			sepNavSelRange = "{1, 26}";
+			sepNavVisRange = "{0, 4973}";
+			sepNavWindowFrame = "{{38, 108}, {1217, 1044}}";
+		};
+	};
+	BB24DE5C10DA7A3F00E9C588 /* iPhone+OF Static Library */ = {
+		activeExec = 0;
+	};
+	BB24DEFA10DA7BEF00E9C588 /* ofAppRunner.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1158, 3445}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 1669}";
+			sepNavWindowFrame = "{{38, 108}, {1217, 1044}}";
+		};
+	};
+	BB24DEFC10DA7BEF00E9C588 /* ofBaseApp.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {523, 637}}";
+			sepNavSelRange = "{405, 0}";
+			sepNavVisRange = "{0, 535}";
+			sepNavWindowFrame = "{{414, 118}, {1104, 1048}}";
+		};
+	};
+	BB24DF0E10DA7BEF00E9C588 /* ofTrueTypeFont.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1251, 11674}}";
+			sepNavSelRange = "{20482, 0}";
+			sepNavVisRange = "{18639, 1760}";
+			sepNavWindowFrame = "{{15, 129}, {1217, 1044}}";
+		};
+	};
+	BB24E02110DA7C6100E9C588 /* ofxAccelerometer.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1158, 916}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 1882}";
+			sepNavWindowFrame = "{{38, 108}, {1217, 1044}}";
+		};
+	};
+	BB24E03510DA7C6100E9C588 /* ofxiPhoneAppDelegate.mm */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1158, 3406}}";
+			sepNavSelRange = "{2221, 17}";
+			sepNavVisRange = "{726, 2259}";
+			sepNavWindowFrame = "{{15, 129}, {1217, 1044}}";
+		};
+	};
+	BB24E03B10DA7C6100E9C588 /* ofxiPhoneKeyboard.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {992, 920}}";
+			sepNavSelRange = "{899, 0}";
+			sepNavVisRange = "{0, 1551}";
+			sepNavWindowFrame = "{{668, 130}, {1051, 1048}}";
+		};
+	};
+	BB24E03C10DA7C6100E9C588 /* ofxiPhoneKeyboard.mm */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1321, 4979}}";
+			sepNavSelRange = "{3341, 0}";
+			sepNavVisRange = "{2223, 1676}";
+			sepNavWindowFrame = "{{151, 130}, {1104, 1048}}";
+		};
+	};
+}

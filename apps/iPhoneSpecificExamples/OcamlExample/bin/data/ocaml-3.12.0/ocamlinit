@@ -1,0 +1,38 @@
+let pi_rational_approx = 355./.113.;;
+
+#load "nums.cma";;
+
+open Num;;
+let rec fact n =
+      if n =/ Int 0 then Int 1 else n */ fact(n -/ Int 1);;
+
+let f x = string_of_num (fact (Int x));;
+
+#load "graphics.cma";;
+
+open Graphics;;
+
+let mytest =
+open_graph "";
+set_color red;
+draw_rect 1 1 100 100;
+set_color green;
+draw_rect 100 100 200 200;
+set_color blue;
+draw_rect 200 200 100 400;
+set_font "frabk";
+moveto 10 300;
+draw_string "Hello";
+set_color white;
+draw_string "Goodbye";;
+set_color green;
+set_font "verdana";
+moveto 10 350;
+draw_string "verdana";
+set_color white;
+draw_string "Xyzzy";;
+
+
+
+
+(* #use "graph_test.ml";; *)

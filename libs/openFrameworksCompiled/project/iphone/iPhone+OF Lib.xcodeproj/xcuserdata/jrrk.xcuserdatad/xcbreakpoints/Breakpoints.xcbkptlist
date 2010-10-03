@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1">
+   <FileBreakpoints>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/jrrk/Downloads/of_preRelease_v0061_iPhone_FAT-pre3/addons/ofxiPhone/src/ofxiPhoneKeyboard.mm"
+         timestampString = "297638290.939293"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "142"
+         endingLineNumber = "142">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/jrrk/Downloads/of_preRelease_v0061_iPhone_FAT-pre3/addons/ofxiPhone/src/ofxiPhoneKeyboard.mm"
+         timestampString = "297638289.332241"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "198"
+         endingLineNumber = "198">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "0"
+         filePath = "/Users/jrrk/Downloads/of_preRelease_v0061_iPhone_FAT-pre3/addons/ofxiPhone/src/ofxiPhoneKeyboard.mm"
+         timestampString = "297638289.334338"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "204"
+         endingLineNumber = "204">
+      </FileBreakpoint>
+   </FileBreakpoints>
+</Bucket>
