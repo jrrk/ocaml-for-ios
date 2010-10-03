@@ -27,74 +27,46 @@
 		6A0235D91257A61B00FAF6DD /* bigarray.cma in Resources */ = {isa = PBXBuildFile; fileRef = 6A0235C21257A61B00FAF6DD /* bigarray.cma */; };
 		6A0235DA1257A61B00FAF6DD /* bigarray.cmi in Resources */ = {isa = PBXBuildFile; fileRef = 6A0235C31257A61B00FAF6DD /* bigarray.cmi */; };
 		6A0235DB1257A61B00FAF6DD /* bigarray.cmo in Resources */ = {isa = PBXBuildFile; fileRef = 6A0235C41257A61B00FAF6DD /* bigarray.cmo */; };
-		6A0235DC1257A61B00FAF6DD /* bigarray.cmx in Resources */ = {isa = PBXBuildFile; fileRef = 6A0235C51257A61B00FAF6DD /* bigarray.cmx */; };
-		6A0235DD1257A61B00FAF6DD /* bigarray.cmxa in Resources */ = {isa = PBXBuildFile; fileRef = 6A0235C61257A61B00FAF6DD /* bigarray.cmxa */; };
 		6A0235DE1257A61B00FAF6DD /* bigarray.ml in Resources */ = {isa = PBXBuildFile; fileRef = 6A0235C81257A61B00FAF6DD /* bigarray.ml */; };
 		6A0235DF1257A61B00FAF6DD /* bigarray.mli in Resources */ = {isa = PBXBuildFile; fileRef = 6A0235C91257A61B00FAF6DD /* bigarray.mli */; };
-		6A0235E01257A61B00FAF6DD /* bigarray.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0235CA1257A61B00FAF6DD /* bigarray.o */; };
 		6A0235E11257A61B00FAF6DD /* bigarray_stubs.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A0235CB1257A61B00FAF6DD /* bigarray_stubs.c */; };
-		6A0235E21257A61B00FAF6DD /* bigarray_stubs.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0235CC1257A61B00FAF6DD /* bigarray_stubs.o */; };
 		6A0235E51257A61B00FAF6DD /* libbigarray.clib in Resources */ = {isa = PBXBuildFile; fileRef = 6A0235CF1257A61B00FAF6DD /* libbigarray.clib */; };
 		6A0235E91257A61B00FAF6DD /* mmap_unix.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A0235D31257A61B00FAF6DD /* mmap_unix.c */; };
-		6A0235EA1257A61B00FAF6DD /* mmap_unix.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0235D41257A61B00FAF6DD /* mmap_unix.o */; };
 		6A0235FE1257A72000FAF6DD /* .cvsignore in Resources */ = {isa = PBXBuildFile; fileRef = 6A0235ED1257A72000FAF6DD /* .cvsignore */; };
 		6A0235FF1257A72000FAF6DD /* .depend in Resources */ = {isa = PBXBuildFile; fileRef = 6A0235EE1257A72000FAF6DD /* .depend */; };
 		6A0236001257A72000FAF6DD /* cldbm.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A0235EF1257A72000FAF6DD /* cldbm.c */; };
-		6A0236011257A72000FAF6DD /* cldbm.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0235F01257A72000FAF6DD /* cldbm.o */; };
 		6A0236031257A72000FAF6DD /* dbm.cma in Resources */ = {isa = PBXBuildFile; fileRef = 6A0235F21257A72000FAF6DD /* dbm.cma */; };
 		6A0236041257A72000FAF6DD /* dbm.cmi in Resources */ = {isa = PBXBuildFile; fileRef = 6A0235F31257A72000FAF6DD /* dbm.cmi */; };
 		6A0236051257A72000FAF6DD /* dbm.cmo in Resources */ = {isa = PBXBuildFile; fileRef = 6A0235F41257A72000FAF6DD /* dbm.cmo */; };
-		6A0236061257A72000FAF6DD /* dbm.cmx in Resources */ = {isa = PBXBuildFile; fileRef = 6A0235F51257A72000FAF6DD /* dbm.cmx */; };
-		6A0236071257A72000FAF6DD /* dbm.cmxa in Resources */ = {isa = PBXBuildFile; fileRef = 6A0235F61257A72000FAF6DD /* dbm.cmxa */; };
 		6A0236081257A72000FAF6DD /* dbm.ml in Resources */ = {isa = PBXBuildFile; fileRef = 6A0235F71257A72000FAF6DD /* dbm.ml */; };
 		6A0236091257A72000FAF6DD /* dbm.mli in Resources */ = {isa = PBXBuildFile; fileRef = 6A0235F81257A72000FAF6DD /* dbm.mli */; };
-		6A02360A1257A72000FAF6DD /* dbm.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0235F91257A72000FAF6DD /* dbm.o */; };
 		6A02360D1257A72000FAF6DD /* libmldbm.clib in Resources */ = {isa = PBXBuildFile; fileRef = 6A0235FC1257A72000FAF6DD /* libmldbm.clib */; };
 		6A0236401257A78300FAF6DD /* .cvsignore in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236101257A78300FAF6DD /* .cvsignore */; };
 		6A0236411257A78300FAF6DD /* .depend in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236111257A78300FAF6DD /* .depend */; };
 		6A0236421257A78300FAF6DD /* condition.cmi in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236121257A78300FAF6DD /* condition.cmi */; };
 		6A0236431257A78300FAF6DD /* condition.cmo in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236131257A78300FAF6DD /* condition.cmo */; };
-		6A0236441257A78300FAF6DD /* condition.cmx in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236141257A78300FAF6DD /* condition.cmx */; };
 		6A0236451257A78300FAF6DD /* condition.ml in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236151257A78300FAF6DD /* condition.ml */; };
 		6A0236461257A78300FAF6DD /* condition.mli in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236161257A78300FAF6DD /* condition.mli */; };
-		6A0236471257A78300FAF6DD /* condition.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0236171257A78300FAF6DD /* condition.o */; };
-		6A0236481257A78300FAF6DD /* dllthreads.so in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236181257A78300FAF6DD /* dllthreads.so */; };
 		6A0236491257A78300FAF6DD /* event.cmi in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236191257A78300FAF6DD /* event.cmi */; };
 		6A02364A1257A78300FAF6DD /* event.cmo in Resources */ = {isa = PBXBuildFile; fileRef = 6A02361A1257A78300FAF6DD /* event.cmo */; };
-		6A02364B1257A78300FAF6DD /* event.cmx in Resources */ = {isa = PBXBuildFile; fileRef = 6A02361B1257A78300FAF6DD /* event.cmx */; };
 		6A02364C1257A78300FAF6DD /* event.ml in Resources */ = {isa = PBXBuildFile; fileRef = 6A02361C1257A78300FAF6DD /* event.ml */; };
 		6A02364D1257A78300FAF6DD /* event.mli in Resources */ = {isa = PBXBuildFile; fileRef = 6A02361D1257A78300FAF6DD /* event.mli */; };
-		6A02364E1257A78300FAF6DD /* event.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A02361E1257A78300FAF6DD /* event.o */; };
-		6A02364F1257A78300FAF6DD /* libthreads.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A02361F1257A78300FAF6DD /* libthreads.a */; };
 		6A0236501257A78300FAF6DD /* libthreads.clib in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236201257A78300FAF6DD /* libthreads.clib */; };
-		6A0236511257A78300FAF6DD /* libthreadsnat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0236211257A78300FAF6DD /* libthreadsnat.a */; };
-		6A0236521257A78300FAF6DD /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 6A0236221257A78300FAF6DD /* Makefile */; };
-		6A0236531257A78300FAF6DD /* Makefile.nt in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236231257A78300FAF6DD /* Makefile.nt */; };
 		6A0236541257A78300FAF6DD /* mutex.cmi in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236241257A78300FAF6DD /* mutex.cmi */; };
 		6A0236551257A78300FAF6DD /* mutex.cmo in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236251257A78300FAF6DD /* mutex.cmo */; };
-		6A0236561257A78300FAF6DD /* mutex.cmx in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236261257A78300FAF6DD /* mutex.cmx */; };
 		6A0236571257A78300FAF6DD /* mutex.ml in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236271257A78300FAF6DD /* mutex.ml */; };
 		6A0236581257A78300FAF6DD /* mutex.mli in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236281257A78300FAF6DD /* mutex.mli */; };
-		6A0236591257A78300FAF6DD /* mutex.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0236291257A78300FAF6DD /* mutex.o */; };
 		6A02365A1257A78300FAF6DD /* st_stubs.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A02362B1257A78300FAF6DD /* st_stubs.c */; };
-		6A02365B1257A78300FAF6DD /* st_stubs_b.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A02362C1257A78300FAF6DD /* st_stubs_b.o */; };
-		6A02365C1257A78300FAF6DD /* st_stubs_n.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A02362D1257A78300FAF6DD /* st_stubs_n.o */; };
 		6A02365D1257A78300FAF6DD /* thread.cmi in Resources */ = {isa = PBXBuildFile; fileRef = 6A02362F1257A78300FAF6DD /* thread.cmi */; };
 		6A02365E1257A78300FAF6DD /* thread.cmo in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236301257A78300FAF6DD /* thread.cmo */; };
-		6A02365F1257A78300FAF6DD /* thread.cmx in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236311257A78300FAF6DD /* thread.cmx */; };
 		6A0236601257A78300FAF6DD /* thread.ml in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236321257A78300FAF6DD /* thread.ml */; };
 		6A0236611257A78300FAF6DD /* thread.mli in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236331257A78300FAF6DD /* thread.mli */; };
-		6A0236621257A78300FAF6DD /* thread.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0236341257A78300FAF6DD /* thread.o */; };
-		6A0236631257A78300FAF6DD /* threads.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0236351257A78300FAF6DD /* threads.a */; };
 		6A0236641257A78300FAF6DD /* threads.cma in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236361257A78300FAF6DD /* threads.cma */; };
-		6A0236651257A78300FAF6DD /* threads.cmxa in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236371257A78300FAF6DD /* threads.cmxa */; };
 		6A0236661257A78300FAF6DD /* threads.mllib in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236391257A78300FAF6DD /* threads.mllib */; };
 		6A0236671257A78300FAF6DD /* threadUnix.cmi in Resources */ = {isa = PBXBuildFile; fileRef = 6A02363A1257A78300FAF6DD /* threadUnix.cmi */; };
 		6A0236681257A78300FAF6DD /* threadUnix.cmo in Resources */ = {isa = PBXBuildFile; fileRef = 6A02363B1257A78300FAF6DD /* threadUnix.cmo */; };
-		6A0236691257A78300FAF6DD /* threadUnix.cmx in Resources */ = {isa = PBXBuildFile; fileRef = 6A02363C1257A78300FAF6DD /* threadUnix.cmx */; };
 		6A02366A1257A78300FAF6DD /* threadUnix.ml in Resources */ = {isa = PBXBuildFile; fileRef = 6A02363D1257A78300FAF6DD /* threadUnix.ml */; };
 		6A02366B1257A78300FAF6DD /* threadUnix.mli in Resources */ = {isa = PBXBuildFile; fileRef = 6A02363E1257A78300FAF6DD /* threadUnix.mli */; };
-		6A02366C1257A78300FAF6DD /* threadUnix.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A02363F1257A78300FAF6DD /* threadUnix.o */; };
 		6A02369B1257A7C700FAF6DD /* .cvsignore in Resources */ = {isa = PBXBuildFile; fileRef = 6A02366E1257A7C700FAF6DD /* .cvsignore */; };
 		6A02369C1257A7C700FAF6DD /* .depend in Resources */ = {isa = PBXBuildFile; fileRef = 6A02366F1257A7C700FAF6DD /* .depend */; };
 		6A02369D1257A7C700FAF6DD /* condition.cmi in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236701257A7C700FAF6DD /* condition.cmi */; };
@@ -119,7 +91,6 @@
 		6A0236B31257A7C800FAF6DD /* pervasives.ml in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236861257A7C700FAF6DD /* pervasives.ml */; };
 		6A0236B41257A7C800FAF6DD /* pervasives.mli in Resources */ = {isa = PBXBuildFile; fileRef = 6A0236871257A7C700FAF6DD /* pervasives.mli */; };
 		6A0236B51257A7C800FAF6DD /* scheduler.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A0236881257A7C700FAF6DD /* scheduler.c */; };
-		6A0236B61257A7C800FAF6DD /* scheduler.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A0236891257A7C700FAF6DD /* scheduler.o */; };
 		6A0236B71257A7C800FAF6DD /* stdlib.cma in Resources */ = {isa = PBXBuildFile; fileRef = 6A02368A1257A7C700FAF6DD /* stdlib.cma */; };
 		6A0236B81257A7C800FAF6DD /* thread.cmi in Resources */ = {isa = PBXBuildFile; fileRef = 6A02368B1257A7C700FAF6DD /* thread.cmi */; };
 		6A0236B91257A7C800FAF6DD /* thread.cmo in Resources */ = {isa = PBXBuildFile; fileRef = 6A02368C1257A7C700FAF6DD /* thread.cmo */; };
@@ -344,7 +315,6 @@
 		6A866DF21243706A00964CF5 /* stack.mli in Resources */ = {isa = PBXBuildFile; fileRef = 6A866C0E1243706900964CF5 /* stack.mli */; };
 		6A866DF31243706A00964CF5 /* std_exit.cmi in Resources */ = {isa = PBXBuildFile; fileRef = 6A866C0F1243706900964CF5 /* std_exit.cmi */; };
 		6A866DF41243706A00964CF5 /* std_exit.cmo in Resources */ = {isa = PBXBuildFile; fileRef = 6A866C101243706900964CF5 /* std_exit.cmo */; };
-		6A866DF71243706A00964CF5 /* std_exit.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A866C131243706900964CF5 /* std_exit.o */; };
 		6A866DFA1243706A00964CF5 /* stdLabels.cmi in Resources */ = {isa = PBXBuildFile; fileRef = 6A866C161243706900964CF5 /* stdLabels.cmi */; };
 		6A866DFD1243706A00964CF5 /* stdLabels.mli in Resources */ = {isa = PBXBuildFile; fileRef = 6A866C191243706900964CF5 /* stdLabels.mli */; };
 		6A866DFF1243706A00964CF5 /* stdlib.cma in Resources */ = {isa = PBXBuildFile; fileRef = 6A866C1B1243706900964CF5 /* stdlib.cma */; };
@@ -484,78 +454,50 @@
 		6A0235C21257A61B00FAF6DD /* bigarray.cma */ = {isa = PBXFileReference; lastKnownFileType = file; path = bigarray.cma; sourceTree = "<group>"; };
 		6A0235C31257A61B00FAF6DD /* bigarray.cmi */ = {isa = PBXFileReference; lastKnownFileType = file; path = bigarray.cmi; sourceTree = "<group>"; };
 		6A0235C41257A61B00FAF6DD /* bigarray.cmo */ = {isa = PBXFileReference; lastKnownFileType = file; path = bigarray.cmo; sourceTree = "<group>"; };
-		6A0235C51257A61B00FAF6DD /* bigarray.cmx */ = {isa = PBXFileReference; lastKnownFileType = file; path = bigarray.cmx; sourceTree = "<group>"; };
-		6A0235C61257A61B00FAF6DD /* bigarray.cmxa */ = {isa = PBXFileReference; lastKnownFileType = file; path = bigarray.cmxa; sourceTree = "<group>"; };
 		6A0235C71257A61B00FAF6DD /* bigarray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bigarray.h; sourceTree = "<group>"; };
 		6A0235C81257A61B00FAF6DD /* bigarray.ml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bigarray.ml; sourceTree = "<group>"; };
 		6A0235C91257A61B00FAF6DD /* bigarray.mli */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bigarray.mli; sourceTree = "<group>"; };
-		6A0235CA1257A61B00FAF6DD /* bigarray.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = bigarray.o; sourceTree = "<group>"; };
 		6A0235CB1257A61B00FAF6DD /* bigarray_stubs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bigarray_stubs.c; sourceTree = "<group>"; };
-		6A0235CC1257A61B00FAF6DD /* bigarray_stubs.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = bigarray_stubs.o; sourceTree = "<group>"; };
 		6A0235CF1257A61B00FAF6DD /* libbigarray.clib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libbigarray.clib; sourceTree = "<group>"; };
 		6A0235D31257A61B00FAF6DD /* mmap_unix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mmap_unix.c; sourceTree = "<group>"; };
-		6A0235D41257A61B00FAF6DD /* mmap_unix.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = mmap_unix.o; sourceTree = "<group>"; };
 		6A0235ED1257A72000FAF6DD /* .cvsignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .cvsignore; sourceTree = "<group>"; };
 		6A0235EE1257A72000FAF6DD /* .depend */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .depend; sourceTree = "<group>"; };
 		6A0235EF1257A72000FAF6DD /* cldbm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cldbm.c; sourceTree = "<group>"; };
-		6A0235F01257A72000FAF6DD /* cldbm.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = cldbm.o; sourceTree = "<group>"; };
 		6A0235F21257A72000FAF6DD /* dbm.cma */ = {isa = PBXFileReference; lastKnownFileType = file; path = dbm.cma; sourceTree = "<group>"; };
 		6A0235F31257A72000FAF6DD /* dbm.cmi */ = {isa = PBXFileReference; lastKnownFileType = file; path = dbm.cmi; sourceTree = "<group>"; };
 		6A0235F41257A72000FAF6DD /* dbm.cmo */ = {isa = PBXFileReference; lastKnownFileType = file; path = dbm.cmo; sourceTree = "<group>"; };
-		6A0235F51257A72000FAF6DD /* dbm.cmx */ = {isa = PBXFileReference; lastKnownFileType = file; path = dbm.cmx; sourceTree = "<group>"; };
-		6A0235F61257A72000FAF6DD /* dbm.cmxa */ = {isa = PBXFileReference; lastKnownFileType = file; path = dbm.cmxa; sourceTree = "<group>"; };
 		6A0235F71257A72000FAF6DD /* dbm.ml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dbm.ml; sourceTree = "<group>"; };
 		6A0235F81257A72000FAF6DD /* dbm.mli */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dbm.mli; sourceTree = "<group>"; };
-		6A0235F91257A72000FAF6DD /* dbm.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = dbm.o; sourceTree = "<group>"; };
 		6A0235FC1257A72000FAF6DD /* libmldbm.clib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libmldbm.clib; sourceTree = "<group>"; };
 		6A0236101257A78300FAF6DD /* .cvsignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .cvsignore; sourceTree = "<group>"; };
 		6A0236111257A78300FAF6DD /* .depend */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .depend; sourceTree = "<group>"; };
 		6A0236121257A78300FAF6DD /* condition.cmi */ = {isa = PBXFileReference; lastKnownFileType = file; path = condition.cmi; sourceTree = "<group>"; };
 		6A0236131257A78300FAF6DD /* condition.cmo */ = {isa = PBXFileReference; lastKnownFileType = file; path = condition.cmo; sourceTree = "<group>"; };
-		6A0236141257A78300FAF6DD /* condition.cmx */ = {isa = PBXFileReference; lastKnownFileType = file; path = condition.cmx; sourceTree = "<group>"; };
 		6A0236151257A78300FAF6DD /* condition.ml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = condition.ml; sourceTree = "<group>"; };
 		6A0236161257A78300FAF6DD /* condition.mli */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = condition.mli; sourceTree = "<group>"; };
-		6A0236171257A78300FAF6DD /* condition.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = condition.o; sourceTree = "<group>"; };
-		6A0236181257A78300FAF6DD /* dllthreads.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.bundle"; path = dllthreads.so; sourceTree = "<group>"; };
 		6A0236191257A78300FAF6DD /* event.cmi */ = {isa = PBXFileReference; lastKnownFileType = file; path = event.cmi; sourceTree = "<group>"; };
 		6A02361A1257A78300FAF6DD /* event.cmo */ = {isa = PBXFileReference; lastKnownFileType = file; path = event.cmo; sourceTree = "<group>"; };
-		6A02361B1257A78300FAF6DD /* event.cmx */ = {isa = PBXFileReference; lastKnownFileType = file; path = event.cmx; sourceTree = "<group>"; };
 		6A02361C1257A78300FAF6DD /* event.ml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = event.ml; sourceTree = "<group>"; };
 		6A02361D1257A78300FAF6DD /* event.mli */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = event.mli; sourceTree = "<group>"; };
-		6A02361E1257A78300FAF6DD /* event.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = event.o; sourceTree = "<group>"; };
-		6A02361F1257A78300FAF6DD /* libthreads.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libthreads.a; sourceTree = "<group>"; };
 		6A0236201257A78300FAF6DD /* libthreads.clib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libthreads.clib; sourceTree = "<group>"; };
-		6A0236211257A78300FAF6DD /* libthreadsnat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libthreadsnat.a; sourceTree = "<group>"; };
-		6A0236221257A78300FAF6DD /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		6A0236231257A78300FAF6DD /* Makefile.nt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.nt; sourceTree = "<group>"; };
 		6A0236241257A78300FAF6DD /* mutex.cmi */ = {isa = PBXFileReference; lastKnownFileType = file; path = mutex.cmi; sourceTree = "<group>"; };
 		6A0236251257A78300FAF6DD /* mutex.cmo */ = {isa = PBXFileReference; lastKnownFileType = file; path = mutex.cmo; sourceTree = "<group>"; };
-		6A0236261257A78300FAF6DD /* mutex.cmx */ = {isa = PBXFileReference; lastKnownFileType = file; path = mutex.cmx; sourceTree = "<group>"; };
 		6A0236271257A78300FAF6DD /* mutex.ml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mutex.ml; sourceTree = "<group>"; };
 		6A0236281257A78300FAF6DD /* mutex.mli */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mutex.mli; sourceTree = "<group>"; };
-		6A0236291257A78300FAF6DD /* mutex.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = mutex.o; sourceTree = "<group>"; };
 		6A02362A1257A78300FAF6DD /* st_posix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = st_posix.h; sourceTree = "<group>"; };
 		6A02362B1257A78300FAF6DD /* st_stubs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = st_stubs.c; sourceTree = "<group>"; };
-		6A02362C1257A78300FAF6DD /* st_stubs_b.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = st_stubs_b.o; sourceTree = "<group>"; };
-		6A02362D1257A78300FAF6DD /* st_stubs_n.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = st_stubs_n.o; sourceTree = "<group>"; };
 		6A02362E1257A78300FAF6DD /* st_win32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = st_win32.h; sourceTree = "<group>"; };
 		6A02362F1257A78300FAF6DD /* thread.cmi */ = {isa = PBXFileReference; lastKnownFileType = file; path = thread.cmi; sourceTree = "<group>"; };
 		6A0236301257A78300FAF6DD /* thread.cmo */ = {isa = PBXFileReference; lastKnownFileType = file; path = thread.cmo; sourceTree = "<group>"; };
-		6A0236311257A78300FAF6DD /* thread.cmx */ = {isa = PBXFileReference; lastKnownFileType = file; path = thread.cmx; sourceTree = "<group>"; };
 		6A0236321257A78300FAF6DD /* thread.ml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thread.ml; sourceTree = "<group>"; };
 		6A0236331257A78300FAF6DD /* thread.mli */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thread.mli; sourceTree = "<group>"; };
-		6A0236341257A78300FAF6DD /* thread.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = thread.o; sourceTree = "<group>"; };
-		6A0236351257A78300FAF6DD /* threads.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = threads.a; sourceTree = "<group>"; };
 		6A0236361257A78300FAF6DD /* threads.cma */ = {isa = PBXFileReference; lastKnownFileType = file; path = threads.cma; sourceTree = "<group>"; };
-		6A0236371257A78300FAF6DD /* threads.cmxa */ = {isa = PBXFileReference; lastKnownFileType = file; path = threads.cmxa; sourceTree = "<group>"; };
 		6A0236381257A78300FAF6DD /* threads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = threads.h; sourceTree = "<group>"; };
 		6A0236391257A78300FAF6DD /* threads.mllib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = threads.mllib; sourceTree = "<group>"; };
 		6A02363A1257A78300FAF6DD /* threadUnix.cmi */ = {isa = PBXFileReference; lastKnownFileType = file; path = threadUnix.cmi; sourceTree = "<group>"; };
 		6A02363B1257A78300FAF6DD /* threadUnix.cmo */ = {isa = PBXFileReference; lastKnownFileType = file; path = threadUnix.cmo; sourceTree = "<group>"; };
-		6A02363C1257A78300FAF6DD /* threadUnix.cmx */ = {isa = PBXFileReference; lastKnownFileType = file; path = threadUnix.cmx; sourceTree = "<group>"; };
 		6A02363D1257A78300FAF6DD /* threadUnix.ml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = threadUnix.ml; sourceTree = "<group>"; };
 		6A02363E1257A78300FAF6DD /* threadUnix.mli */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = threadUnix.mli; sourceTree = "<group>"; };
-		6A02363F1257A78300FAF6DD /* threadUnix.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = threadUnix.o; sourceTree = "<group>"; };
 		6A02366E1257A7C700FAF6DD /* .cvsignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .cvsignore; sourceTree = "<group>"; };
 		6A02366F1257A7C700FAF6DD /* .depend */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .depend; sourceTree = "<group>"; };
 		6A0236701257A7C700FAF6DD /* condition.cmi */ = {isa = PBXFileReference; lastKnownFileType = file; path = condition.cmi; sourceTree = "<group>"; };
@@ -580,7 +522,6 @@
 		6A0236861257A7C700FAF6DD /* pervasives.ml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pervasives.ml; sourceTree = "<group>"; };
 		6A0236871257A7C700FAF6DD /* pervasives.mli */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pervasives.mli; sourceTree = "<group>"; };
 		6A0236881257A7C700FAF6DD /* scheduler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = scheduler.c; sourceTree = "<group>"; };
-		6A0236891257A7C700FAF6DD /* scheduler.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = scheduler.o; sourceTree = "<group>"; };
 		6A02368A1257A7C700FAF6DD /* stdlib.cma */ = {isa = PBXFileReference; lastKnownFileType = file; path = stdlib.cma; sourceTree = "<group>"; };
 		6A02368B1257A7C700FAF6DD /* thread.cmi */ = {isa = PBXFileReference; lastKnownFileType = file; path = thread.cmi; sourceTree = "<group>"; };
 		6A02368C1257A7C700FAF6DD /* thread.cmo */ = {isa = PBXFileReference; lastKnownFileType = file; path = thread.cmo; sourceTree = "<group>"; };
@@ -811,7 +752,6 @@
 		6A866C0E1243706900964CF5 /* stack.mli */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stack.mli; sourceTree = "<group>"; };
 		6A866C0F1243706900964CF5 /* std_exit.cmi */ = {isa = PBXFileReference; lastKnownFileType = file; path = std_exit.cmi; sourceTree = "<group>"; };
 		6A866C101243706900964CF5 /* std_exit.cmo */ = {isa = PBXFileReference; lastKnownFileType = file; path = std_exit.cmo; sourceTree = "<group>"; };
-		6A866C131243706900964CF5 /* std_exit.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = std_exit.o; sourceTree = "<group>"; };
 		6A866C161243706900964CF5 /* stdLabels.cmi */ = {isa = PBXFileReference; lastKnownFileType = file; path = stdLabels.cmi; sourceTree = "<group>"; };
 		6A866C191243706900964CF5 /* stdLabels.mli */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stdLabels.mli; sourceTree = "<group>"; };
 		6A866C1B1243706900964CF5 /* stdlib.cma */ = {isa = PBXFileReference; lastKnownFileType = file; path = stdlib.cma; sourceTree = "<group>"; };
@@ -1035,23 +975,6 @@
 				5E2568A610ED26CD00A9501C /* PocoNet.a in Frameworks */,
 				5E2568A710ED26CD00A9501C /* PocoUtil.a in Frameworks */,
 				5E2568A810ED26CD00A9501C /* PocoXML.a in Frameworks */,
-				6A866DF71243706A00964CF5 /* std_exit.o in Frameworks */,
-				6A0235E01257A61B00FAF6DD /* bigarray.o in Frameworks */,
-				6A0235E21257A61B00FAF6DD /* bigarray_stubs.o in Frameworks */,
-				6A0235EA1257A61B00FAF6DD /* mmap_unix.o in Frameworks */,
-				6A0236011257A72000FAF6DD /* cldbm.o in Frameworks */,
-				6A02360A1257A72000FAF6DD /* dbm.o in Frameworks */,
-				6A0236471257A78300FAF6DD /* condition.o in Frameworks */,
-				6A02364E1257A78300FAF6DD /* event.o in Frameworks */,
-				6A02364F1257A78300FAF6DD /* libthreads.a in Frameworks */,
-				6A0236511257A78300FAF6DD /* libthreadsnat.a in Frameworks */,
-				6A0236591257A78300FAF6DD /* mutex.o in Frameworks */,
-				6A02365B1257A78300FAF6DD /* st_stubs_b.o in Frameworks */,
-				6A02365C1257A78300FAF6DD /* st_stubs_n.o in Frameworks */,
-				6A0236621257A78300FAF6DD /* thread.o in Frameworks */,
-				6A0236631257A78300FAF6DD /* threads.a in Frameworks */,
-				6A02366C1257A78300FAF6DD /* threadUnix.o in Frameworks */,
-				6A0236B61257A7C800FAF6DD /* scheduler.o in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1155,17 +1078,12 @@
 				6A0235C21257A61B00FAF6DD /* bigarray.cma */,
 				6A0235C31257A61B00FAF6DD /* bigarray.cmi */,
 				6A0235C41257A61B00FAF6DD /* bigarray.cmo */,
-				6A0235C51257A61B00FAF6DD /* bigarray.cmx */,
-				6A0235C61257A61B00FAF6DD /* bigarray.cmxa */,
 				6A0235C71257A61B00FAF6DD /* bigarray.h */,
 				6A0235C81257A61B00FAF6DD /* bigarray.ml */,
 				6A0235C91257A61B00FAF6DD /* bigarray.mli */,
-				6A0235CA1257A61B00FAF6DD /* bigarray.o */,
 				6A0235CB1257A61B00FAF6DD /* bigarray_stubs.c */,
-				6A0235CC1257A61B00FAF6DD /* bigarray_stubs.o */,
 				6A0235CF1257A61B00FAF6DD /* libbigarray.clib */,
 				6A0235D31257A61B00FAF6DD /* mmap_unix.c */,
-				6A0235D41257A61B00FAF6DD /* mmap_unix.o */,
 			);
 			name = bigarray;
 			path = "ocaml-3.12.0/otherlibs/bigarray";
@@ -1177,15 +1095,11 @@
 				6A0235ED1257A72000FAF6DD /* .cvsignore */,
 				6A0235EE1257A72000FAF6DD /* .depend */,
 				6A0235EF1257A72000FAF6DD /* cldbm.c */,
-				6A0235F01257A72000FAF6DD /* cldbm.o */,
 				6A0235F21257A72000FAF6DD /* dbm.cma */,
 				6A0235F31257A72000FAF6DD /* dbm.cmi */,
 				6A0235F41257A72000FAF6DD /* dbm.cmo */,
-				6A0235F51257A72000FAF6DD /* dbm.cmx */,
-				6A0235F61257A72000FAF6DD /* dbm.cmxa */,
 				6A0235F71257A72000FAF6DD /* dbm.ml */,
 				6A0235F81257A72000FAF6DD /* dbm.mli */,
-				6A0235F91257A72000FAF6DD /* dbm.o */,
 				6A0235FC1257A72000FAF6DD /* libmldbm.clib */,
 			);
 			name = dbm;
@@ -1199,50 +1113,31 @@
 				6A0236111257A78300FAF6DD /* .depend */,
 				6A0236121257A78300FAF6DD /* condition.cmi */,
 				6A0236131257A78300FAF6DD /* condition.cmo */,
-				6A0236141257A78300FAF6DD /* condition.cmx */,
 				6A0236151257A78300FAF6DD /* condition.ml */,
 				6A0236161257A78300FAF6DD /* condition.mli */,
-				6A0236171257A78300FAF6DD /* condition.o */,
-				6A0236181257A78300FAF6DD /* dllthreads.so */,
 				6A0236191257A78300FAF6DD /* event.cmi */,
 				6A02361A1257A78300FAF6DD /* event.cmo */,
-				6A02361B1257A78300FAF6DD /* event.cmx */,
 				6A02361C1257A78300FAF6DD /* event.ml */,
 				6A02361D1257A78300FAF6DD /* event.mli */,
-				6A02361E1257A78300FAF6DD /* event.o */,
-				6A02361F1257A78300FAF6DD /* libthreads.a */,
 				6A0236201257A78300FAF6DD /* libthreads.clib */,
-				6A0236211257A78300FAF6DD /* libthreadsnat.a */,
-				6A0236221257A78300FAF6DD /* Makefile */,
-				6A0236231257A78300FAF6DD /* Makefile.nt */,
 				6A0236241257A78300FAF6DD /* mutex.cmi */,
 				6A0236251257A78300FAF6DD /* mutex.cmo */,
-				6A0236261257A78300FAF6DD /* mutex.cmx */,
 				6A0236271257A78300FAF6DD /* mutex.ml */,
 				6A0236281257A78300FAF6DD /* mutex.mli */,
-				6A0236291257A78300FAF6DD /* mutex.o */,
 				6A02362A1257A78300FAF6DD /* st_posix.h */,
 				6A02362B1257A78300FAF6DD /* st_stubs.c */,
-				6A02362C1257A78300FAF6DD /* st_stubs_b.o */,
-				6A02362D1257A78300FAF6DD /* st_stubs_n.o */,
 				6A02362E1257A78300FAF6DD /* st_win32.h */,
 				6A02362F1257A78300FAF6DD /* thread.cmi */,
 				6A0236301257A78300FAF6DD /* thread.cmo */,
-				6A0236311257A78300FAF6DD /* thread.cmx */,
 				6A0236321257A78300FAF6DD /* thread.ml */,
 				6A0236331257A78300FAF6DD /* thread.mli */,
-				6A0236341257A78300FAF6DD /* thread.o */,
-				6A0236351257A78300FAF6DD /* threads.a */,
 				6A0236361257A78300FAF6DD /* threads.cma */,
-				6A0236371257A78300FAF6DD /* threads.cmxa */,
 				6A0236381257A78300FAF6DD /* threads.h */,
 				6A0236391257A78300FAF6DD /* threads.mllib */,
 				6A02363A1257A78300FAF6DD /* threadUnix.cmi */,
 				6A02363B1257A78300FAF6DD /* threadUnix.cmo */,
-				6A02363C1257A78300FAF6DD /* threadUnix.cmx */,
 				6A02363D1257A78300FAF6DD /* threadUnix.ml */,
 				6A02363E1257A78300FAF6DD /* threadUnix.mli */,
-				6A02363F1257A78300FAF6DD /* threadUnix.o */,
 			);
 			name = systhreads;
 			path = "ocaml-3.12.0/otherlibs/systhreads";
@@ -1275,7 +1170,6 @@
 				6A0236861257A7C700FAF6DD /* pervasives.ml */,
 				6A0236871257A7C700FAF6DD /* pervasives.mli */,
 				6A0236881257A7C700FAF6DD /* scheduler.c */,
-				6A0236891257A7C700FAF6DD /* scheduler.o */,
 				6A02368A1257A7C700FAF6DD /* stdlib.cma */,
 				6A02368B1257A7C700FAF6DD /* thread.cmi */,
 				6A02368C1257A7C700FAF6DD /* thread.cmo */,
@@ -1555,7 +1449,6 @@
 				6A866C0E1243706900964CF5 /* stack.mli */,
 				6A866C0F1243706900964CF5 /* std_exit.cmi */,
 				6A866C101243706900964CF5 /* std_exit.cmo */,
-				6A866C131243706900964CF5 /* std_exit.o */,
 				6A866C161243706900964CF5 /* stdLabels.cmi */,
 				6A866C191243706900964CF5 /* stdLabels.mli */,
 				6A866C1B1243706900964CF5 /* stdlib.cma */,
@@ -2172,8 +2065,6 @@
 				6A0235D91257A61B00FAF6DD /* bigarray.cma in Resources */,
 				6A0235DA1257A61B00FAF6DD /* bigarray.cmi in Resources */,
 				6A0235DB1257A61B00FAF6DD /* bigarray.cmo in Resources */,
-				6A0235DC1257A61B00FAF6DD /* bigarray.cmx in Resources */,
-				6A0235DD1257A61B00FAF6DD /* bigarray.cmxa in Resources */,
 				6A0235DE1257A61B00FAF6DD /* bigarray.ml in Resources */,
 				6A0235DF1257A61B00FAF6DD /* bigarray.mli in Resources */,
 				6A0235E51257A61B00FAF6DD /* libbigarray.clib in Resources */,
@@ -2182,8 +2073,6 @@
 				6A0236031257A72000FAF6DD /* dbm.cma in Resources */,
 				6A0236041257A72000FAF6DD /* dbm.cmi in Resources */,
 				6A0236051257A72000FAF6DD /* dbm.cmo in Resources */,
-				6A0236061257A72000FAF6DD /* dbm.cmx in Resources */,
-				6A0236071257A72000FAF6DD /* dbm.cmxa in Resources */,
 				6A0236081257A72000FAF6DD /* dbm.ml in Resources */,
 				6A0236091257A72000FAF6DD /* dbm.mli in Resources */,
 				6A02360D1257A72000FAF6DD /* libmldbm.clib in Resources */,
@@ -2191,33 +2080,25 @@
 				6A0236411257A78300FAF6DD /* .depend in Resources */,
 				6A0236421257A78300FAF6DD /* condition.cmi in Resources */,
 				6A0236431257A78300FAF6DD /* condition.cmo in Resources */,
-				6A0236441257A78300FAF6DD /* condition.cmx in Resources */,
 				6A0236451257A78300FAF6DD /* condition.ml in Resources */,
 				6A0236461257A78300FAF6DD /* condition.mli in Resources */,
-				6A0236481257A78300FAF6DD /* dllthreads.so in Resources */,
 				6A0236491257A78300FAF6DD /* event.cmi in Resources */,
 				6A02364A1257A78300FAF6DD /* event.cmo in Resources */,
-				6A02364B1257A78300FAF6DD /* event.cmx in Resources */,
 				6A02364C1257A78300FAF6DD /* event.ml in Resources */,
 				6A02364D1257A78300FAF6DD /* event.mli in Resources */,
 				6A0236501257A78300FAF6DD /* libthreads.clib in Resources */,
-				6A0236531257A78300FAF6DD /* Makefile.nt in Resources */,
 				6A0236541257A78300FAF6DD /* mutex.cmi in Resources */,
 				6A0236551257A78300FAF6DD /* mutex.cmo in Resources */,
-				6A0236561257A78300FAF6DD /* mutex.cmx in Resources */,
 				6A0236571257A78300FAF6DD /* mutex.ml in Resources */,
 				6A0236581257A78300FAF6DD /* mutex.mli in Resources */,
 				6A02365D1257A78300FAF6DD /* thread.cmi in Resources */,
 				6A02365E1257A78300FAF6DD /* thread.cmo in Resources */,
-				6A02365F1257A78300FAF6DD /* thread.cmx in Resources */,
 				6A0236601257A78300FAF6DD /* thread.ml in Resources */,
 				6A0236611257A78300FAF6DD /* thread.mli in Resources */,
 				6A0236641257A78300FAF6DD /* threads.cma in Resources */,
-				6A0236651257A78300FAF6DD /* threads.cmxa in Resources */,
 				6A0236661257A78300FAF6DD /* threads.mllib in Resources */,
 				6A0236671257A78300FAF6DD /* threadUnix.cmi in Resources */,
 				6A0236681257A78300FAF6DD /* threadUnix.cmo in Resources */,
-				6A0236691257A78300FAF6DD /* threadUnix.cmx in Resources */,
 				6A02366A1257A78300FAF6DD /* threadUnix.ml in Resources */,
 				6A02366B1257A78300FAF6DD /* threadUnix.mli in Resources */,
 				6A02369B1257A7C700FAF6DD /* .cvsignore in Resources */,
@@ -2441,7 +2322,6 @@
 				6A0235E11257A61B00FAF6DD /* bigarray_stubs.c in Sources */,
 				6A0235E91257A61B00FAF6DD /* mmap_unix.c in Sources */,
 				6A0236001257A72000FAF6DD /* cldbm.c in Sources */,
-				6A0236521257A78300FAF6DD /* Makefile in Sources */,
 				6A02365A1257A78300FAF6DD /* st_stubs.c in Sources */,
 				6A0236B51257A7C800FAF6DD /* scheduler.c in Sources */,
 			);
