@@ -1,0 +1,14 @@
+#summary Welcome to OCAML for the iPad
+
+= Introduction =
+
+If you came here because you installed OCAML for the iPad, take a moment to learn
+about the benefits of functional programming
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
