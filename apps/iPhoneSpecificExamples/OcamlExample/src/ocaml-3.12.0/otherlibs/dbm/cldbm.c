@@ -164,3 +164,14 @@ value caml_dbm_nextkey(value vdb)             /* ML */
   }
   else raise_not_found();
 }
+
+struct camlsyms dbm_camlsyms[] = {
+"caml_dbm_close", caml_dbm_close,
+"caml_dbm_delete", caml_dbm_delete,
+"caml_dbm_fetch", caml_dbm_fetch,
+"caml_dbm_firstkey", caml_dbm_firstkey,
+"caml_dbm_insert", caml_dbm_insert,
+"caml_dbm_nextkey", caml_dbm_nextkey,
+"caml_dbm_open", caml_dbm_open,
+"caml_dbm_replace", caml_dbm_replace,
+	"", NULL};

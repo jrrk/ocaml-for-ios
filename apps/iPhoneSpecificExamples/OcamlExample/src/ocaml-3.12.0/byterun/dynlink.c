@@ -171,6 +171,8 @@ void * caml_dlopen(char *handle, int for_execution, int global)
 	if (!strcmp(handle, "dllcamlstr.so")) table = str_camlsyms;
 	if (!strcmp(handle, "dllgraphics.so")) table = graph_camlsyms;
 	if (!strcmp(handle, "dllunix.so")) table = unix_camlsyms;
+	if (!strcmp(handle, "dllmldbm.so")) table = dbm_camlsyms;
+	if (!strcmp(handle, "dllbigarray.so")) table = bigarray_camlsyms;
 	for (tptr=table; tptr->ref; ++tptr)
 	{
 	}
