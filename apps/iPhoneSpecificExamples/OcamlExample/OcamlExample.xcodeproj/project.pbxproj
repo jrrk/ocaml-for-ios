@@ -354,6 +354,7 @@
 		6AE5BA6A1243D8E10049F6DE /* bng_sparc.c in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BA2F1243D8E00049F6DE /* bng_sparc.c */; };
 		6AE5BA6B1243D8E10049F6DE /* nat_stubs.c in Sources */ = {isa = PBXBuildFile; fileRef = 6AE5BA311243D8E00049F6DE /* nat_stubs.c */; };
 		6AE6B9AB1244CBD200F8FAA4 /* strstubs.c in Sources */ = {isa = PBXBuildFile; fileRef = 6AE6B9AA1244CBD200F8FAA4 /* strstubs.c */; };
+		6AFABCC1125A651700292540 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AFABCC0125A651700292540 /* Default.png */; };
 		6AFB2A7912414F42006172C3 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB2A7812414F42006172C3 /* main.c */; };
 		6AFB2A82124150E4006172C3 /* prims.c in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB2A81124150E4006172C3 /* prims.c */; };
 		6AFB2B7B12415A60006172C3 /* alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 6AFB2AEA12415A60006172C3 /* alloc.c */; };
@@ -793,6 +794,7 @@
 		6AE5BA301243D8E00049F6DE /* nat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nat.h; sourceTree = "<group>"; };
 		6AE5BA311243D8E00049F6DE /* nat_stubs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = nat_stubs.c; sourceTree = "<group>"; };
 		6AE6B9AA1244CBD200F8FAA4 /* strstubs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = strstubs.c; path = "ocaml-3.12.0/otherlibs/str/strstubs.c"; sourceTree = "<group>"; };
+		6AFABCC0125A651700292540 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		6AFB2A7812414F42006172C3 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		6AFB2A81124150E4006172C3 /* prims.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = prims.c; sourceTree = "<group>"; };
 		6AFB2AEA12415A60006172C3 /* alloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = alloc.c; sourceTree = "<group>"; };
@@ -999,6 +1001,7 @@
 				BB16F26B0F2B646B00518274 /* addons */,
 				BB16E9930F2B1E5900518274 /* libs */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				6AFABCC0125A651700292540 /* Default.png */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -2140,6 +2143,7 @@
 				6A0236C51257A7C800FAF6DD /* unix.ml in Resources */,
 				6A0236C61257A7C800FAF6DD /* unix.mli in Resources */,
 				6A0236C71257A7C800FAF6DD /* unix.mllib in Resources */,
+				6AFABCC1125A651700292540 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2343,8 +2347,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mr Jonathan Kimmitt (5AU5B5HJQX)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mr Jonathan Kimmitt (5AU5B5HJQX)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mr Jonathan Kimmitt";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mr Jonathan Kimmitt";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = "";
@@ -2408,8 +2412,8 @@
 					"-w",
 				);
 				PRODUCT_NAME = OcamlExample;
-				PROVISIONING_PROFILE = "7C317BC4-8F9D-4136-9741-445C244E22E1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7C317BC4-8F9D-4136-9741-445C244E22E1";
+				PROVISIONING_PROFILE = "0F35B26A-50DF-489A-9510-3B5B2D63F980";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0F35B26A-50DF-489A-9510-3B5B2D63F980";
 				SDKROOT = iphoneos3.2;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6";
@@ -2422,8 +2426,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mr Jonathan Kimmitt (5AU5B5HJQX)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mr Jonathan Kimmitt (5AU5B5HJQX)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_MODEL_TUNING = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2485,8 +2489,8 @@
 					"-w",
 				);
 				PRODUCT_NAME = OcamlExample;
-				PROVISIONING_PROFILE = "7C317BC4-8F9D-4136-9741-445C244E22E1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7C317BC4-8F9D-4136-9741-445C244E22E1";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos3.2;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6";
@@ -2514,8 +2518,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mr Jonathan Kimmitt (5AU5B5HJQX)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mr Jonathan Kimmitt (5AU5B5HJQX)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mr Jonathan Kimmitt";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mr Jonathan Kimmitt";
 				COPY_PHASE_STRIP = YES;
 				GCC_MODEL_TUNING = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2574,8 +2578,8 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = OcamlExample;
-				PROVISIONING_PROFILE = "7C317BC4-8F9D-4136-9741-445C244E22E1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7C317BC4-8F9D-4136-9741-445C244E22E1";
+				PROVISIONING_PROFILE = "0F35B26A-50DF-489A-9510-3B5B2D63F980";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0F35B26A-50DF-489A-9510-3B5B2D63F980";
 				SDKROOT = iphoneos3.2;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "armv7 armv6";
