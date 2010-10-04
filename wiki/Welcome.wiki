@@ -1,0 +1,6 @@
+#summary Welcome to OCAML for the iPad
+
+= Introduction =
+
+If you came here because you installed OCAML for the iPad, take a moment to learn
+about the benefits of functional programming
