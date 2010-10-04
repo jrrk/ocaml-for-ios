@@ -1079,3 +1079,44 @@ CAMLprim value caml_ba_init(value unit)
   caml_register_custom_operations(&caml_ba_ops);
   return Val_unit;
 }
+
+CAMLprim value caml_ba_map_file(value vfd, value vkind, value vlayout, value vshared, value vdim, value vstart);
+CAMLprim value caml_ba_map_file_bytecode(value * argv, int argn);
+
+struct camlsyms bigarray_camlsyms[] = {
+"caml_ba_map_file", caml_ba_map_file,
+"caml_ba_blit", caml_ba_blit,
+"caml_ba_create", caml_ba_create,
+"caml_ba_dim", caml_ba_dim,
+"caml_ba_fill", caml_ba_fill,
+"caml_ba_get_1", caml_ba_get_1,
+"caml_ba_get_2", caml_ba_get_2,
+"caml_ba_get_3", caml_ba_get_3,
+#if 0
+"caml_ba_get_4", caml_ba_get_4,
+"caml_ba_get_5", caml_ba_get_5,
+"caml_ba_get_6", caml_ba_get_6,
+"caml_ba_get_N", caml_ba_get_N,
+#endif	
+"caml_ba_get_generic", caml_ba_get_generic,
+"caml_ba_init", caml_ba_init,
+"caml_ba_kind", caml_ba_kind,
+"caml_ba_layout", caml_ba_layout,
+"caml_ba_map_file", caml_ba_map_file,
+"caml_ba_map_file_bytecode", caml_ba_map_file_bytecode,
+"caml_ba_num_dims", caml_ba_num_dims,
+"caml_ba_reshape", caml_ba_reshape,
+"caml_ba_set_1", caml_ba_set_1,
+"caml_ba_set_2", caml_ba_set_2,
+"caml_ba_set_3", caml_ba_set_3,
+#if 0
+"caml_ba_set_4", caml_ba_set_4,
+"caml_ba_set_5", caml_ba_set_5,
+"caml_ba_set_6", caml_ba_set_6,
+"caml_ba_set_N", caml_ba_set_N,
+#endif
+"caml_ba_set_generic", caml_ba_set_generic,
+"caml_ba_slice", caml_ba_slice,
+"caml_ba_sub", caml_ba_sub,
+	"", NULL};
+
