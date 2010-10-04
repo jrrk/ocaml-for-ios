@@ -36,7 +36,9 @@ typedef struct camlsyms {
 	extern struct camlsyms unix_camlsyms[];
 	extern struct camlsyms dbm_camlsyms[];
 	extern struct camlsyms bigarray_camlsyms[];
-	
+	extern struct camlsyms thread_camlsyms[];
+	extern struct camlsyms systhread_camlsyms[];
+
 	int ocaml_main(int argc, const char **argv);
 	int stdin_read(char *buf, int siz);
 	int stdout_write(char *buf, int len);

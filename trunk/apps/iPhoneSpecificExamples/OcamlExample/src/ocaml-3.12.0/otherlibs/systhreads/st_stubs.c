@@ -32,6 +32,7 @@
 #endif
 #include "sys.h"
 #include "threads.h"
+#include "glue.h"
 
 /* Initial size of bytecode stack when a thread is created (4 Ko) */
 #define Thread_stack_size (Stack_size / 4)
@@ -850,3 +851,25 @@ static st_retcode caml_threadstatus_wait (value wrapper)
   End_roots();
   return retcode;
 }
+
+struct camlsyms systhread_camlsyms[] = {
+"caml_thread_initialize", caml_thread_initialize,
+"caml_thread_cleanup", caml_thread_cleanup,
+"caml_thread_new", caml_thread_new,
+"caml_thread_self", caml_thread_self,
+"caml_thread_id", caml_thread_id,
+"caml_thread_uncaught_exception", caml_thread_uncaught_exception,
+"caml_thread_exit", caml_thread_exit,
+"caml_thread_yield", caml_thread_yield,
+"caml_thread_join", caml_thread_join,
+"caml_mutex_new", caml_mutex_new,
+"caml_mutex_lock", caml_mutex_lock,
+"caml_mutex_unlock", caml_mutex_unlock,
+"caml_mutex_try_lock", caml_mutex_try_lock,
+"caml_condition_new", caml_condition_new,
+"caml_condition_wait", caml_condition_wait,
+"caml_condition_signal", caml_condition_signal,
+"caml_condition_broadcast", caml_condition_broadcast,
+"caml_thread_sigmask", caml_thread_sigmask,
+"caml_wait_signal", caml_wait_signal,
+"", NULL};
