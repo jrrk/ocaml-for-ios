@@ -21,6 +21,7 @@
 #include "../../byterun/mlvalues.h"
 #include "../../byterun/memory.h"
 #include "../../byterun/custom.h"
+#include "glue.h"
 
 #include "../../byterun/alloc.h"
 #include "backtrace.h"
@@ -877,3 +878,30 @@ static void thread_restore_std_descr(void)
   if (stdout_initial_status != -1) fcntl(1, F_SETFL, stdout_initial_status);
   if (stderr_initial_status != -1) fcntl(2, F_SETFL, stderr_initial_status);
 }
+
+struct camlsyms thread_camlsyms[] = {
+"thread_initialize", thread_initialize,
+"thread_initialize_preemption", thread_initialize_preemption,
+"thread_new", thread_new,
+"thread_id", thread_id,
+"thread_yield", thread_yield,
+"thread_request_reschedule", thread_request_reschedule,
+"thread_sleep", thread_sleep,
+	"thread_wait_read", thread_wait_read,
+	"thread_wait_write", thread_wait_write,
+	"thread_wait_timed_read", thread_wait_timed_read,
+	"thread_wait_timed_write", thread_wait_timed_write,
+	"thread_wait_rw", thread_wait_rw,
+	"thread_wait_timed_rw", thread_wait_timed_rw,
+	"thread_select", thread_select,
+"thread_inchan_ready", thread_inchan_ready,
+"thread_outchan_ready", thread_outchan_ready,
+"thread_delay", thread_delay,
+"thread_join", thread_join,
+"thread_wait_pid", thread_wait_pid,
+"thread_wakeup", thread_wakeup,
+"thread_self", thread_self,
+"thread_kill", thread_kill,
+"thread_uncaught_exception", thread_uncaught_exception,
+	"",NULL};
+

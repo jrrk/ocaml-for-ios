@@ -173,6 +173,8 @@ void * caml_dlopen(char *handle, int for_execution, int global)
 	if (!strcmp(handle, "dllunix.so")) table = unix_camlsyms;
 	if (!strcmp(handle, "dllmldbm.so")) table = dbm_camlsyms;
 	if (!strcmp(handle, "dllbigarray.so")) table = bigarray_camlsyms;
+	if (!strcmp(handle, "dllthreads.so")) table = systhread_camlsyms;
+	if (!strcmp(handle, "dllvmthreads.so")) table = thread_camlsyms;
 	for (tptr=table; tptr->ref; ++tptr)
 	{
 	}
