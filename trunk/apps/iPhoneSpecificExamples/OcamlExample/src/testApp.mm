@@ -229,7 +229,7 @@ void testApp::draw()
 					for (j = 0; j < ptr2-ptr; j++) str[j] = ptr[j].arg1;
 					str[j] = 0;
 					ofScale(mytextsize,mytextsize,1);
-					myfonts[myfont].myfont.drawString(str, ptr->arg2,  ptr->arg3);
+					myfonts[myfont].myfont.drawString(str, ptr->arg2/mytextsize,  ptr->arg3/mytextsize);
 					ofScale(1,1,1);
 					free(str);
 					ptr = ptr2-1;
