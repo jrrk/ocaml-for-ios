@@ -4,3 +4,17 @@
 
 If you came here because you installed OCAML for the iPad, take a moment to learn
 about the benefits of functional programming
+
+This application is pending review at the Apple Store just now. Further review stages may be needed due to the huge flexibility of the language.
+
+This language uses a lot of strange punctuation, although available on the built-in touch pad there may be three or four keypresses per character in some cases. An external wireless or wired keyboard is recommended. The wireless keyboard can be shared with a mac as well.
+
+= Welcome Screen =
+
+The welcome screen it has to be said is a bit plain by iPad standards, fortunately you can change it to whatever you want using the document download/upload feature of iTunes.
+
+Should you wish to show the default screen again after it has cleared, just use
+
+welcome 20;;
+
+where 20 is a number representing the time delay for display
