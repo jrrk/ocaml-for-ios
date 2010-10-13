@@ -95,3 +95,16 @@ You can try the factorial function straight away using the following syntax:
 f 9;; (* you type this bit *)
 - : string = "362880" (* the iPad responds *)
 
+= Writing you own programs =
+
+By now you are probably itching to try your own programs, especially if you already consulted the official tutorial at
+
+http://caml.inria.fr/pub/docs/manual-ocaml/manual003.html
+
+Where this tutorial refers to the interactive system, you can take that to mean the iPad app. If it refers to the non-interactive system, this capability is not available on the iPad (at the moment)
+
+You may also find it useful to consult the library guide at:
+
+http://caml.inria.fr/pub/docs/manual-ocaml/libref/index.html
+
+As you can see, there are a lot of functions available, the majority of which should work just fine on the iPad. You need not be concerned about experimenting. Everything you do works inside a virtual machine, which checks everything you do, and whatever the virtual machine does is checked by iOS to be sure it is legal. If iOS returns an error this will be passed onto you in the gui in most cases.
