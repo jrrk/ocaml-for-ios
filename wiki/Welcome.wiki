@@ -18,3 +18,80 @@ Should you wish to show the default screen again after it has cleared, just use
 welcome 20;;
 
 where 20 is a number representing the time delay for display
+
+Here we look at the contents of the welcome screen in more detail (called ocamlinit)
+
+(* This sample demonstrates the floating point capability by achieving a high accuracy
+approximation to pi - you can print the result from the gui with the command
+pi_rational_approx;; - the ;; represents end of current block of ocaml phrases *)
+
+let pi_rational_approx = 355./.113.;;
+
+(* These directives (only valid from the interactive toplevel) invoke the appropriate libraries from the underlying operating system. Normally this capability uses dynamic load libraries but on the iPad everything needed or possible is statically linked and code signed to prevent problems with viruses etc *)
+
+#load "nums.cma";; (* high precision numeric library *)
+#load "unix.cma";; (* for Unix.sleep command and other functions not used here *)
+#load "graphics.cma";; (* for the standard ocaml graphics capability *)
+
+(* When we open the library, it makes its contents available without using Num.
+in front of every reference to that library *)
+
+open Num;;
+
+(* define a recursive definition of the factorial function - namely n! is n times (n-1)!
+the =/ and */ and -/ are the extended precision versions of equality, multiplication and subtraction *)
+
+let rec fact n =
+      if n =/ Int 0 then Int 1 else n */ fact(n -/ Int 1);;
+
+(* define a function which takes a plain integer argument and returns the factorial as a string *)
+
+let f x = string_of_num (fact (Int x));;
+
+(* open the graphics library *)
+
+open Graphics;;
+
+(* define a function named welcome which takes a delay argument and then executes the hopefully self-explanatory list of graphics instructions. This will be the display you see on startup *)
+
+let welcome dly=
+open_graph "";
+set_color red;
+draw_rect 1 1 100 100;
+set_color green;
+moveto 10 50;
+set_font "Bitmap";
+draw_string "see http://code.google.com/p/ocaml-for-ios/wiki/Welcome for instructions";
+draw_rect 100 100 200 200;
+set_color blue;
+draw_rect 200 200 100 400;
+set_font "frabk";
+moveto 10 300;
+draw_string "Hello";
+set_color white;
+moveto 100 400;
+draw_string "Welcome";
+set_color green;
+set_font "verdana";
+moveto 200 500;
+draw_string "TO";
+set_color white;
+set_text_size 48;
+moveto 300 600;
+draw_string "OCAML";
+set_text_size 12;
+Unix.sleep dly;
+close_graph();;
+
+(* execute the above function with a fifteen second delay *)
+welcome 15;;
+
+(* toplevel directive to launch the graph_test.ml program. .ml represents ocaml source code like what you are reading as opposed to .cma which is a compiled library *)
+
+(* #use "graph_test.ml";; *)
+
+You can try the factorial function straight away using the following syntax:
+
+f 9;; (* you type this bit *)
+- : string = "362880" (* the iPad responds *)
+
