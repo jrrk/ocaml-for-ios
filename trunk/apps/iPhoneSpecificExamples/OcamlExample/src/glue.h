@@ -41,7 +41,7 @@ typedef struct camlsyms {
 
 	int ocaml_main(int argc, const char **argv);
 	int stdin_read(char *buf, int siz);
-	int stdout_write(char *buf, int len);
+	int stdout_write(const char *buf, int len);
 	int bas_read(int fd, char *buf, int len);
 	int bas_write(int fd, char *buf, int len);
 	int bas_open(char *name, int flags, int mode);
