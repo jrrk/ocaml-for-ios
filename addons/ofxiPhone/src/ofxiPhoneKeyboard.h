@@ -34,7 +34,7 @@
 - (void) openKeyboard;
 - (void) addtobuf: (char) ch;
 - (char) removefrombuf;
-
+- (void) setTransform: (int) r;
 @end
 
 class ofxiPhoneKeyboard 
@@ -59,7 +59,7 @@ class ofxiPhoneKeyboard
 		char getRText();
 		bool isKeyboardShowing();
 		void addtobuf(char);
-		
+		void setTransform(int);
 		
 	protected:
 		

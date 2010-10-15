@@ -129,7 +129,11 @@ bool ofxiPhoneKeyboard::isKeyboardShowing()
 	return [keyboard isKeyboardShowing];
 }
 
-
+//--------------------------------------------------------------
+void ofxiPhoneKeyboard::setTransform(int r)
+{
+	[keyboard setTransform:(int)r];
+}
 
 // CLASS IMPLEMENTATIONS--------------objc------------------------
 //----------------------------------------------------------------
@@ -219,26 +223,7 @@ bool ofxiPhoneKeyboard::isKeyboardShowing()
 	if(self = [super init])
 	{			
 		_textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, w, h)];
-		
-		switch (ofxiPhoneGetOrientation()) 
-		{
-			case OFXIPHONE_ORIENTATION_LANDSCAPE_LEFT:
-				_textField.transform = CGAffineTransformMakeRotation(-M_PI_2);
-				break;
-				
-			case OFXIPHONE_ORIENTATION_LANDSCAPE_RIGHT:
-				
-				_textField.transform = CGAffineTransformMakeRotation(M_PI_2);
-				break;
-				
-			/*case OFXIPHONE_ORIENTATION_UPSIDEDOWN:
-				_textField.transform = CGAffineTransformMakeRotation(M_PI / 2.0);
-				break;*/
-				
-			default:
-				break;
-		}
-		
+
 		[self setFrame:CGRectMake(x,y,w,h)];
 		
 		[_textField setDelegate:self];
@@ -338,11 +323,6 @@ bool ofxiPhoneKeyboard::isKeyboardShowing()
 			[_textField setFrame: CGRectMake(s.width-rect.origin.y , rect.origin.x, rect.size.height, rect.size.width)];
 			break;
 			
-		/*case OFXIPHONE_ORIENTATION_UPSIDEDOWN:
-			_textField = [[UITextField alloc] initWithFrame:CGRectMake(x+320, y, w, h)];
-			_textField.transform = CGAffineTransformMakeRotation(M_PI / 2.0);
-			break;*/
-			
 		default:
 			[_textField setFrame: CGRectMake(rect.origin.x , rect.origin.y-rect.size.height, rect.size.width, rect.size.height)];
 			break;
@@ -354,5 +334,12 @@ bool ofxiPhoneKeyboard::isKeyboardShowing()
 {
 	[_textField becomeFirstResponder];
 }
+
+//--------------------------------------------------------------
+- (void) setTransform: (int) r
+{
+	_textField.transform = CGAffineTransformMakeRotation(r * M_PI / 180.0);
+}
+
 //--------------------------------------------------------------
 @end
