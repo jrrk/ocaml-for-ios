@@ -27,10 +27,12 @@ public:
 	ofTrueTypeFont  franklinBook;
 	ofTrueTypeFont	verdana;
 
+	int dly;
+
 	struct {
 		int x,y,z,r;
 		UIDeviceOrientation orient;
-	} orientation;
+	} orientation, oldorient;
 	
 	struct fontcache {
 		ofTrueTypeFont myfont;

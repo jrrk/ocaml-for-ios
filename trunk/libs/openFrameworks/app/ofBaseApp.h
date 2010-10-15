@@ -16,7 +16,7 @@ class ofBaseApp{
 		virtual void update(){}
 		virtual void draw(){}
 		virtual void wakethread() {};
-		virtual int load_of_font(const char *) {};
+		virtual int load_of_font(const char *) {return 0;};
 		virtual void mysetpixel(unsigned x, unsigned y, char colour) {};
 		virtual void framebitmap(char *str, int wid, int hgt) {};
 		virtual void exit(){}

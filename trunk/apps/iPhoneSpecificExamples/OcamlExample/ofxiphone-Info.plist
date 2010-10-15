@@ -52,6 +52,8 @@
 	<key>UIInterfaceOrientation</key>
 	<string>UIInterfaceOrientationPortrait</string>
 	<key>UIStatusBarHidden</key>
-	<false/>
+	<true/>
+	<key>LSUIPresentationMode</key>
+	<integer>0</integer>
 </dict>
 </plist>

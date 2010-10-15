@@ -146,11 +146,11 @@ void testApp::setup()
 	keyboard = new ofxiPhoneKeyboard(0,52,320,32);
 	keyboard->openKeyboard();
 	keyboard->setVisible(true);
-	keyboard->setBgColor(255, 255, 255, 255);
-	keyboard->setFontColor(0,0,0, 255);
+	keyboard->setFontColor(255, 255, 255, 255);
+	keyboard->setBgColor(0,0,0, 255);
 	keyboard->setFontSize(26);
 	keyboard->setPosition(0, 755);
-	
+	keyboard->setTransform(0);
 	memset(stdoutbuf, ' ', sizeof stdoutbuf);
 	
 	LaunchThread();
@@ -196,15 +196,27 @@ void stdout_puts(const char *buf)
 //--------------------------------------------------------------
 void testApp::draw()
 {	
-	static int dly = 0;
 	func_t *ptr = myqueue;
 	int myfont = -1;
 	float mytextsize = 1.0;
-	ofSetColor(180, 180, 180, 255);
-	ofTranslate(orientation.x, orientation.y, orientation.z);
-	ofRotate(orientation.r);
 	int first = gr_initialized ? height-4 : 0;
 	if (row < first) row = first;
+	ofSetColor(180, 180, 180, 255);
+#ifdef NAFF_TRANSITION
+	if (dly < 100)
+	{
+		ofTranslate((dly*orientation.x+(100-dly)*oldorient.x)/200,
+					(dly*orientation.y+(100-dly)*oldorient.y)/200,
+					(dly*orientation.z+(100-dly)*oldorient.z)/200);
+		ofRotate((dly*orientation.r+(100-dly)*oldorient.r)/200);
+	}
+	else 
+#endif
+	{
+		ofTranslate(orientation.x, orientation.y, orientation.z);
+		ofRotate(orientation.r);
+	}
+
 	for (int i = first; i < height; i++)
 	{
 		pthread_mutex_lock(&mut);
@@ -214,7 +226,7 @@ void testApp::draw()
 //		ofDrawBitmapString(stdoutbuf[i], 2, 8+14*i);
 		pthread_mutex_unlock(&mut);
 	}
-	while (ptr < qptr) {
+	if (gr_initialized) while (ptr < qptr) {
 		pthread_mutex_lock(&mut);
 		switch (ptr->func) {
 			case qRect:
@@ -287,6 +299,7 @@ void testApp::draw()
 		keyboard->openKeyboard();
 		keyboard->setVisible(true);
 	}
+	else if (dly > 100) dly = 100;
 }
 
 void testApp::wakethread()
@@ -347,48 +360,75 @@ void testApp::gotMemoryWarning()
 //--------------------------------------------------------------
 void testApp::deviceOrientationChanged(int newOrientation)
 {
+//	dly = 0;
+	oldorient = orientation;
 	orientation.orient = (UIDeviceOrientation) newOrientation;
+	keyboard->setVisible(false);
+//	keyboard->closeKeyboard();
 	switch (orientation.orient) {
 		case     UIDeviceOrientationUnknown:
 		case     UIDeviceOrientationPortrait:            // Device oriented vertically, home button on the bottom
+			[[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationPortrait];
 			orientation.x = 0;
 			orientation.y = 0;
 			orientation.z = 0;
 			orientation.r = 0;
+			keyboard->setPosition(orientation.x,orientation.y-755);
+			keyboard->setPosition(0,755);
+			keyboard->setTransform(orientation.r);
 			break;
 		case     UIDeviceOrientationPortraitUpsideDown:  // Device oriented vertically, home button on the top
+			[[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationPortraitUpsideDown];
 			orientation.x = 768;
 			orientation.y = 1024;
 			orientation.z = 0;
 			orientation.r = 180;
+			keyboard->setPosition(orientation.x,orientation.y-755);
+			keyboard->setPosition(500,500);
+			keyboard->setTransform(orientation.r);
 			break;
 		case     UIDeviceOrientationLandscapeLeft:       // Device oriented horizontally, home button on the right
+			[[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationLandscapeLeft];
 			orientation.x = 768;
 			orientation.y = 0;
 			orientation.z = 0;
 			orientation.r = 90;
+			keyboard->setPosition(orientation.x,orientation.y+755);
+			keyboard->setPosition(500,500);
+			keyboard->setTransform(orientation.r);
 			break;
 		case     UIDeviceOrientationLandscapeRight:      // Device oriented horizontally, home button on the left
+			[[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationLandscapeRight];
 			orientation.x = 0;
 			orientation.y = 1024;
 			orientation.z = 0;
 			orientation.r = 270;
+			keyboard->setPosition(orientation.x,orientation.y+755);
+			keyboard->setPosition(500,500);
+			keyboard->setTransform(orientation.r);
 			break;
 		case     UIDeviceOrientationFaceUp:              // Device oriented flat, face up
+			[[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationPortrait];
 			orientation.x = 0;
 			orientation.y = 0;
 			orientation.z = 0;
 			orientation.r = 0;
-			ofTranslate(0, 0, 0);
-			ofRotate(0);
+			keyboard->setPosition(orientation.x,orientation.y+755);
+			keyboard->setPosition(500,500);
+			keyboard->setTransform(orientation.r);
 			break;
 		case     UIDeviceOrientationFaceDown:            // Device oriented flat, face down
+			[[UIApplication sharedApplication] setStatusBarOrientation: UIInterfaceOrientationPortrait];
 			orientation.x = 384;
 			orientation.y = 512;
 			orientation.z = 0;
 			orientation.r = -1;
+			keyboard->setPosition(orientation.x,orientation.y+755);
+			keyboard->setPosition(500,500);
+			keyboard->setTransform(orientation.r);
 			break;
 	}
+keyboard->setVisible(true);
 }
 
 int stdout_write(const char *buf, int len)
