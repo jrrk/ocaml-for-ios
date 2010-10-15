@@ -2347,8 +2347,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Mr Jonathan Kimmitt";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mr Jonathan Kimmitt";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = "";
@@ -2412,11 +2412,11 @@
 					"-w",
 				);
 				PRODUCT_NAME = OcamlExample;
-				PROVISIONING_PROFILE = "0F35B26A-50DF-489A-9510-3B5B2D63F980";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0F35B26A-50DF-489A-9510-3B5B2D63F980";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos3.2;
 				TARGETED_DEVICE_FAMILY = 2;
-				VALID_ARCHS = "armv7 armv6";
+				VALID_ARCHS = "armv6 armv7 x86_64";
 			};
 			name = Debug;
 		};
@@ -2493,7 +2493,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos3.2;
 				TARGETED_DEVICE_FAMILY = 2;
-				VALID_ARCHS = "armv7 armv6";
+				VALID_ARCHS = "armv6 armv7 x86_64";
 			};
 			name = Release;
 		};
@@ -2582,7 +2582,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0F35B26A-50DF-489A-9510-3B5B2D63F980";
 				SDKROOT = iphoneos3.2;
 				TARGETED_DEVICE_FAMILY = 2;
-				VALID_ARCHS = "armv7 armv6";
+				VALID_ARCHS = "armv6 armv7 x86_64";
 			};
 			name = Distribution;
 		};

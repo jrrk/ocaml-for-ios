@@ -19,21 +19,7 @@ int main(int argc, char **argv){
 	strcpy(getPwd, realp);
 	getPwd2 = strdup(realp);
 	chdir(getPwd2);
-#if 0
-	FILE *infile = fopen("ocamlinit","r");
-	if (infile)
-	{
-		FILE *outfile = fopen(".ocamlinit","w");
-		int ch = getc(infile);
-		while (ch != EOF)
-		{
-			putc(ch, outfile);
-			ch = getc(infile);
-		}
-		fclose(infile);
-		fclose(outfile);		
-	}
-#endif
+
 	char *right = strrchr(getPwd, '/');
 	if (right) right[1] = 0;
 	

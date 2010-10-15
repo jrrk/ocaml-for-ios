@@ -94,6 +94,11 @@ void* PosixThreadMainRoutine(void* data)
 			const char *argv[] = {"ocamlrun", ocaml, "-I", ocamlinclude, "-init", init, NULL};
 			ocaml_main(6,argv);
 		}
+	}	
+	else 
+	{
+		const char *argv[] = {"ocamlrun", ocaml, "-I", ocamlinclude, "-init", init, NULL};
+		ocaml_main(6,argv);
 	}
 	free(ocaml);
 	free(ocamlinit);
@@ -183,6 +188,11 @@ void testApp::update()
 	ofBackground(0,0,0);	
 }
 
+void stdout_puts(const char *buf)
+{
+	stdout_write(buf, strlen(buf));
+}
+
 //--------------------------------------------------------------
 void testApp::draw()
 {	
@@ -191,7 +201,8 @@ void testApp::draw()
 	int myfont = -1;
 	float mytextsize = 1.0;
 	ofSetColor(180, 180, 180, 255);
-	//	ofSetColor(20, 160, 240, 255);
+	ofTranslate(orientation.x, orientation.y, orientation.z);
+	ofRotate(orientation.r);
 	int first = gr_initialized ? height-4 : 0;
 	if (row < first) row = first;
 	for (int i = first; i < height; i++)
@@ -336,12 +347,53 @@ void testApp::gotMemoryWarning()
 //--------------------------------------------------------------
 void testApp::deviceOrientationChanged(int newOrientation)
 {
-	
+	orientation.orient = (UIDeviceOrientation) newOrientation;
+	switch (orientation.orient) {
+		case     UIDeviceOrientationUnknown:
+		case     UIDeviceOrientationPortrait:            // Device oriented vertically, home button on the bottom
+			orientation.x = 0;
+			orientation.y = 0;
+			orientation.z = 0;
+			orientation.r = 0;
+			break;
+		case     UIDeviceOrientationPortraitUpsideDown:  // Device oriented vertically, home button on the top
+			orientation.x = 768;
+			orientation.y = 1024;
+			orientation.z = 0;
+			orientation.r = 180;
+			break;
+		case     UIDeviceOrientationLandscapeLeft:       // Device oriented horizontally, home button on the right
+			orientation.x = 768;
+			orientation.y = 0;
+			orientation.z = 0;
+			orientation.r = 90;
+			break;
+		case     UIDeviceOrientationLandscapeRight:      // Device oriented horizontally, home button on the left
+			orientation.x = 0;
+			orientation.y = 1024;
+			orientation.z = 0;
+			orientation.r = 270;
+			break;
+		case     UIDeviceOrientationFaceUp:              // Device oriented flat, face up
+			orientation.x = 0;
+			orientation.y = 0;
+			orientation.z = 0;
+			orientation.r = 0;
+			ofTranslate(0, 0, 0);
+			ofRotate(0);
+			break;
+		case     UIDeviceOrientationFaceDown:            // Device oriented flat, face down
+			orientation.x = 384;
+			orientation.y = 512;
+			orientation.z = 0;
+			orientation.r = -1;
+			break;
+	}
 }
 
-int stdout_write(char *buf, int len)
+int stdout_write(const char *buf, int len)
 {
-	char *bufend = buf+len;
+	const char *bufend = buf+len;
 	unsigned arg[20];
 	int Line, Column, Mode, Seq;
 	pthread_mutex_lock(&mut);
