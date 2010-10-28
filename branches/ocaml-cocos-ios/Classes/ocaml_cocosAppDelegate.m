@@ -14,7 +14,6 @@
 #import "drawPrimitivesNew.h"
 // #import "src/ofxiPhoneKeyboard.h"
 #import "RootViewController.h"
-#include "glue.h"
 
 @implementation ocaml_cocosAppDelegate
 
@@ -148,7 +147,7 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField;          // return YES to allow editing to stop and to resign first responder status. NO to disallow the editing session to end
 {
-	return NO;
+	return YES;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;   // return NO to not change text

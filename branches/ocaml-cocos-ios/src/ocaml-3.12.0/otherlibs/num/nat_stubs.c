@@ -25,7 +25,7 @@
 #include "bng.h"
 #include "nat.h"
 
-#include "glue.h"
+#include "../../byterun/glue.h"
 
 /* Stub code for the Nat module. */
 

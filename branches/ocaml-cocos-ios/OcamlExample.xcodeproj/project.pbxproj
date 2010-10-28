@@ -61,7 +61,6 @@
 		50F41341106926B2002A0D5E /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F41321106926B2002A0D5E /* CJSONScanner.m */; };
 		50F41342106926B2002A0D5E /* CJSONSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 50F41322106926B2002A0D5E /* CJSONSerializer.h */; };
 		50F41343106926B2002A0D5E /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F41323106926B2002A0D5E /* CJSONSerializer.m */; };
-		50F414F01069373D002A0D5E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 50F414EC1069373D002A0D5E /* Default.png */; };
 		50F414F11069373D002A0D5E /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 50F414ED1069373D002A0D5E /* fps_images.png */; };
 		50F414F21069373D002A0D5E /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 50F414EE1069373D002A0D5E /* Icon.png */; };
 		6A35DEC9127309D3004AF565 /* bigarray_stubs.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A35DBE1127309D2004AF565 /* bigarray_stubs.c */; };
@@ -175,6 +174,10 @@
 		6A35E144127309D3004AF565 /* utimes.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A35DE83127309D3004AF565 /* utimes.c */; };
 		6A35E145127309D3004AF565 /* wait.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A35DE84127309D3004AF565 /* wait.c */; };
 		6A35E146127309D3004AF565 /* write.c in Sources */ = {isa = PBXBuildFile; fileRef = 6A35DE85127309D3004AF565 /* write.c */; };
+		6AD8EC101278008A00803EA7 /* Default-LandscapeLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AD8EC0F1278008A00803EA7 /* Default-LandscapeLeft.png */; };
+		6AD8EC141278009C00803EA7 /* Default-LandscapeRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AD8EC111278009C00803EA7 /* Default-LandscapeRight.png */; };
+		6AD8EC151278009C00803EA7 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AD8EC121278009C00803EA7 /* Default-Portrait.png */; };
+		6AD8EC161278009C00803EA7 /* Default-PortraitUpsideDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AD8EC131278009C00803EA7 /* Default-PortraitUpsideDown.png */; };
 		6ADA335C1272AC9500C6D9C2 /* r2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ADA335B1272AC9500C6D9C2 /* r2.png */; };
 		6ADA37E41272C14600C6D9C2 /* ocaml-3.12.0 in Resources */ = {isa = PBXBuildFile; fileRef = 6ADA37311272C14600C6D9C2 /* ocaml-3.12.0 */; };
 		6ADDDEA41272F2EA00E4739B /* b2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ADDDEA31272F2EA00E4739B /* b2.png */; };
@@ -457,7 +460,6 @@
 		50F41321106926B2002A0D5E /* CJSONScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONScanner.m; sourceTree = "<group>"; };
 		50F41322106926B2002A0D5E /* CJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializer.h; sourceTree = "<group>"; };
 		50F41323106926B2002A0D5E /* CJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializer.m; sourceTree = "<group>"; };
-		50F414EC1069373D002A0D5E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		50F414ED1069373D002A0D5E /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fps_images.png; sourceTree = "<group>"; };
 		50F414EE1069373D002A0D5E /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		50F414EF1069373D002A0D5E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -724,6 +726,11 @@
 		6A35DE84127309D3004AF565 /* wait.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wait.c; sourceTree = "<group>"; };
 		6A35DE85127309D3004AF565 /* write.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = write.c; sourceTree = "<group>"; };
 		6A35E3371273375F004AF565 /* drawPrimitivesNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drawPrimitivesNew.h; sourceTree = "<group>"; };
+		6AD6E93A1276C30900E49319 /* glue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glue.h; sourceTree = "<group>"; };
+		6AD8EC0F1278008A00803EA7 /* Default-LandscapeLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-LandscapeLeft.png"; sourceTree = "<group>"; };
+		6AD8EC111278009C00803EA7 /* Default-LandscapeRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-LandscapeRight.png"; sourceTree = "<group>"; };
+		6AD8EC121278009C00803EA7 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
+		6AD8EC131278009C00803EA7 /* Default-PortraitUpsideDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-PortraitUpsideDown.png"; sourceTree = "<group>"; };
 		6ADA335B1272AC9500C6D9C2 /* r2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = r2.png; sourceTree = "<group>"; };
 		6ADA37311272C14600C6D9C2 /* ocaml-3.12.0 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "ocaml-3.12.0"; path = "Resources/ocaml-3.12.0"; sourceTree = SOURCE_ROOT; };
 		6ADDDEA31272F2EA00E4739B /* b2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b2.png; sourceTree = "<group>"; };
@@ -1196,6 +1203,10 @@
 		50F414EB1069373D002A0D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6AD8EC111278009C00803EA7 /* Default-LandscapeRight.png */,
+				6AD8EC121278009C00803EA7 /* Default-Portrait.png */,
+				6AD8EC131278009C00803EA7 /* Default-PortraitUpsideDown.png */,
+				6AD8EC0F1278008A00803EA7 /* Default-LandscapeLeft.png */,
 				6ADDDEA51272F2F700E4739B /* f2.png */,
 				6ADDDEA31272F2EA00E4739B /* b2.png */,
 				6ADA37311272C14600C6D9C2 /* ocaml-3.12.0 */,
@@ -1203,7 +1214,6 @@
 				6AE0911212701D0600474E60 /* r1.png */,
 				6AE0911012701CFB00474E60 /* f1.png */,
 				6AE0910E12701CED00474E60 /* b1.png */,
-				50F414EC1069373D002A0D5E /* Default.png */,
 				50F414ED1069373D002A0D5E /* fps_images.png */,
 				50F414EE1069373D002A0D5E /* Icon.png */,
 				50F414EF1069373D002A0D5E /* Info.plist */,
@@ -1572,6 +1582,7 @@
 		6AEBD84E1271FD83000789D9 /* byterun */ = {
 			isa = PBXGroup;
 			children = (
+				6AD6E93A1276C30900E49319 /* glue.h */,
 				6AEBD9CA1272006A000789D9 /* instrtrace.c */,
 				6AEBD8511271FD83000789D9 /* alloc.c */,
 				6AEBD8521271FD83000789D9 /* alloc.h */,
@@ -2017,7 +2028,6 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "OcamlExample" */;
 			compatibilityVersion = "Xcode 3.1";
-			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -2040,7 +2050,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50F414F01069373D002A0D5E /* Default.png in Resources */,
 				50F414F11069373D002A0D5E /* fps_images.png in Resources */,
 				50F414F21069373D002A0D5E /* Icon.png in Resources */,
 				6AE0910F12701CED00474E60 /* b1.png in Resources */,
@@ -2050,6 +2059,10 @@
 				6ADA37E41272C14600C6D9C2 /* ocaml-3.12.0 in Resources */,
 				6ADDDEA41272F2EA00E4739B /* b2.png in Resources */,
 				6ADDDEA61272F2F700E4739B /* f2.png in Resources */,
+				6AD8EC101278008A00803EA7 /* Default-LandscapeLeft.png in Resources */,
+				6AD8EC141278009C00803EA7 /* Default-LandscapeRight.png in Resources */,
+				6AD8EC151278009C00803EA7 /* Default-Portrait.png in Resources */,
+				6AD8EC161278009C00803EA7 /* Default-PortraitUpsideDown.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2338,6 +2351,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2346,8 +2360,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ocaml_cocos_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
-				HEADER_SEARCH_PATHS = "/Users/jrrk/ocaml-cocos/Classes";
+				GCC_VERSION = "";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -2355,7 +2371,9 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = OcamlExample;
-				SDKROOT = iphoneos;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = 2;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -2365,13 +2383,17 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ocaml_cocos_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -2379,7 +2401,9 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = OcamlExample;
-				SDKROOT = iphoneos;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = 2;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
@@ -2392,6 +2416,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
 				PREBINDING = NO;
 				PRODUCT_NAME = "cocos2d libraries";
 			};
@@ -2405,11 +2430,77 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
 				PREBINDING = NO;
 				PRODUCT_NAME = "cocos2d libraries";
 				ZERO_LINK = NO;
 			};
 			name = Release;
+		};
+		6AE538B31278CFF900840524 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				"GCC_THUMB_SUPPORT[arch=armv6]" = NO;
+				"GCC_THUMB_SUPPORT[arch=armv7]" = YES;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				PREBINDING = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Distribution;
+		};
+		6AE538B41278CFF900840524 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ocaml_cocos_Prefix.pch;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = OcamlExample;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos3.2;
+				TARGETED_DEVICE_FAMILY = 2;
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = Distribution;
+		};
+		6AE538B51278CFF900840524 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = "cocos2d libraries";
+				ZERO_LINK = NO;
+			};
+			name = Distribution;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2467,6 +2558,7 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+				6AE538B41278CFF900840524 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2476,6 +2568,7 @@
 			buildConfigurations = (
 				506EE05F10304ED500A389B3 /* Debug */,
 				506EE06010304ED500A389B3 /* Release */,
+				6AE538B51278CFF900840524 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2485,6 +2578,7 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+				6AE538B31278CFF900840524 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

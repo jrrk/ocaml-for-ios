@@ -242,7 +242,7 @@ static int parse_command_line(char **argv)
 
   for(i = 1; argv[i] != NULL && argv[i][0] == '-'; i++) {
     switch(argv[i][1]) {
-#ifdef DEBUG
+#ifdef OCAML_DEBUG
     case 't':
       caml_trace_flag++;
       break;
@@ -353,7 +353,7 @@ CAMLexport void caml_main(char **argv)
   caml_ext_table_init(&caml_shared_libs_path, 8);
   caml_external_raise = NULL;
   /* Determine options and position of bytecode file */
-#ifdef DEBUG
+#ifdef OCAML_DEBUG
   caml_verb_gc = 0xBF;
 #endif
   parse_camlrunparam();
@@ -448,7 +448,7 @@ CAMLexport void caml_startup_code(
 
   caml_init_ieee_floats();
   caml_init_custom_operations();
-#ifdef DEBUG
+#ifdef OCAML_DEBUG
   caml_verb_gc = 63;
 #endif
   cds_file = getenv("CAML_DEBUG_FILE");

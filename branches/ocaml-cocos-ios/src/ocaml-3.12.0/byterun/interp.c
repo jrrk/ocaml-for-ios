@@ -54,7 +54,7 @@ sp is a local copy of the global variable caml_extern_sp. */
 #    define Jumptbl_base ((char *) 0)
 #    define jumptbl_base ((char *) 0)
 #  endif
-#  ifdef DEBUG
+#  ifdef OCAML_DEBUG
 #    define Next goto next_instr
 #  else
 #    define Next goto *(void *)(jumptbl_base + *pc++)
@@ -186,7 +186,7 @@ extern intnat caml_safe_mod(intnat p, intnat q);
 #endif
 
 
-#ifdef DEBUG
+#ifdef OCAML_DEBUG
 static intnat caml_bcodcount;
 #endif
 
@@ -265,7 +265,7 @@ value caml_interprete(code_t prog, asize_t prog_size)
   accu = Val_int(0);
 
 #ifdef THREADED_CODE
-#ifdef DEBUG
+#ifdef OCAML_DEBUG
  next_instr:
   if (caml_icount-- == 0) caml_stop_here ();
   Assert(sp >= caml_stack_low);
@@ -274,7 +274,7 @@ value caml_interprete(code_t prog, asize_t prog_size)
   goto *(void *)(jumptbl_base + *pc++); /* Jump to the first instruction */
 #else
   while(1) {
-#ifdef DEBUG
+#ifdef OCAML_DEBUG
     caml_bcodcount++;
     if (caml_icount-- == 0) caml_stop_here ();
     if (caml_trace_flag>1) printf("\n##%ld\n", caml_bcodcount);

@@ -24,6 +24,8 @@ public:
 	void gotMemoryWarning();
 	void deviceOrientationChanged(int newOrientation);
 
+	ofxiPhoneKeyboard *keyboards[UIDeviceOrientationFaceDown+1];
+	
 	ofTrueTypeFont  franklinBook;
 	ofTrueTypeFont	verdana;
 

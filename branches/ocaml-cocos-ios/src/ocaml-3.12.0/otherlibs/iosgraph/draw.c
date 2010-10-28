@@ -20,17 +20,13 @@
 #include "../../byterun/memory.h"
 #include "../../byterun/fail.h"
 #include "graphstubs.h"
-#include "glue.h"
+#include "../../byterun/glue.h"
 
 HDC gcMetaFile;
 int grdisplay_mode;
 int grremember_mode;
-
-static void GetCurrentPosition(HDC hDC,POINT *pt)
-{
-        MoveToEx(hDC,0,0,pt);
-        MoveToEx(hDC,pt->x,pt->y,0);
-}
+static char *myfont = "Arial";
+static int mytextsize;
 
 static value gr_draw_or_fill_arc(value vx, value vy, value vrx, value vry,
                                  value vstart, value vend, BOOL fill);
@@ -87,13 +83,9 @@ CAMLprim value caml_gr_draw_rect(value vx, value vy, value vw, value vh)
 
 CAMLprim value caml_gr_draw_text(value text,value x)
 {
-		int i, len = Int_val(x);
-	char *str = String_val(text);
-	for (i = 0; i < len; i++)
-	{
-		queue(qDrawBitmapCharacter,str[i], grwindow.grx, grwindow.gry, 0);
-        grwindow.grx += 8;
-	}
+		int len = Int_val(x);
+		char *str = String_val(text);
+		queue(qText, DrawText(str, myfont, len, grwindow.grx, grwindow.gry, mytextsize),0,0,0);
         return Val_unit;
 }
 
@@ -221,8 +213,6 @@ CAMLprim value caml_gr_show_bitmap(value filename,int x,int y)
         return Val_unit;
 }
 
-
-
 CAMLprim value caml_gr_get_mousex(void)
 {
         POINT pt;
@@ -242,34 +232,29 @@ CAMLprim value caml_gr_get_mousey(void)
 CAMLprim value caml_gr_set_font(value fontname)
 {
         gr_check_open();
-        int handle = of_font(String_val(fontname));
-		queue(qSetFont, handle, 0, 0, 0);
+        myfont = String_val(fontname);
         return Val_unit;
 }
 
 CAMLprim value caml_gr_set_text_size (value sz)
 {
-		queue(qTextSize, Int_val(sz), 0, 0, 0);
+		mytextsize = Int_val(sz);
         return Val_unit;
 }
 
 CAMLprim value caml_gr_draw_char(value chr)
 {
+	char str[1] = {Int_val(chr)};
 	gr_check_open();
-	queue(qDrawBitmapCharacter,Int_val(chr), grwindow.grx, grwindow.gry, 0);
-	grwindow.grx += 8;
+	queue(qText, DrawText(str, myfont, 1, grwindow.grx, grwindow.gry, mytextsize), 0, 0, 0);
 	return Val_unit;
 }
 
 CAMLprim value caml_gr_draw_string(value str)
 {
-	int i, len = string_length(str);
+	int len = string_length(str);
 	char *str1 = String_val(str);
-	for (i = 0; i < len; i++)
-	{
-		queue(qDrawBitmapCharacter,str1[i], grwindow.grx, grwindow.gry, 0);
-		grwindow.grx += 8;
-	}
+	queue(qText, DrawText(str1, myfont, len, grwindow.grx, grwindow.gry, mytextsize), 0, 0, 0);
 	return Val_unit;
 }
 

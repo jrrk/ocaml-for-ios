@@ -29,7 +29,7 @@
 #include "../../byterun/memory.h"
 #include "../../byterun/fail.h"
 #include "../../byterun/io.h"
-#include "glue.h"
+#include "../../byterun/glue.h"
 
 #define UNIX_BUFFER_SIZE 16384
 

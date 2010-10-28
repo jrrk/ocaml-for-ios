@@ -32,7 +32,7 @@
 #endif
 #include "sys.h"
 #include "threads.h"
-#include "glue.h"
+#include "../../byterun/glue.h"
 
 /* Initial size of bytecode stack when a thread is created (4 Ko) */
 #define Thread_stack_size (Stack_size / 4)

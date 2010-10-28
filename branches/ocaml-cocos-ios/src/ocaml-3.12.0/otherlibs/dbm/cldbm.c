@@ -19,7 +19,7 @@
 #include "../../byterun/memory.h"
 #include "../../byterun/custom.h"
 #include "bigarray.h"
-#include "glue.h"
+#include "../../byterun/glue.h"
 
 #ifdef DBM_USES_GDBM_NDBM
 #include <gdbm-ndbm.h>

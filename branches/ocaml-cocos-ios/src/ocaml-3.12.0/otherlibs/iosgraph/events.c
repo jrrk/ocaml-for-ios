@@ -19,7 +19,7 @@
 #include "../../byterun/memory.h"
 #include "../../byterun/fail.h"
 #include "graphstubs.h"
-#include "glue.h"
+#include "../../byterun/glue.h"
 
 enum {
   EVENT_BUTTON_DOWN = 1,
