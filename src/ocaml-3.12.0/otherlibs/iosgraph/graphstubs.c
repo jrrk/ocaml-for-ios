@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <memory.h>
 #include "../../byterun/mlvalues.h"
-#include "glue.h"
+#include "../../byterun/glue.h"
 #include "graphstubs.h"
 
 GR_WINDOW grwindow;
@@ -58,7 +58,6 @@ struct camlsyms graph_camlsyms[] = {
 	"caml_gr_close_subwindow", caml_gr_close_subwindow,
 	"", NULL};
 
-static char *myfont;
 enum {TEXT};
 static int movex, movey, mode, tcolour;
 static void *gc, *hsel;
@@ -98,11 +97,6 @@ extern void *CreateCompatibleDC(void *arg) {
 
 extern void *CreateEvent(void * arg1,  BOOL arg2,  BOOL arg3,  void *arg4) { 
 	myputs(__FILE__,__LINE__); return 0; }
-
-extern HFONT CreateFontIndirect(LOGFONT *arg) { 
-	myfont = arg->lfFaceName;
-	return 0;
-}
 
 extern HPEN CreatePenIndirect(LOGPEN *arg) { 
 	HPEN pen = malloc(sizeof(LOGPEN));

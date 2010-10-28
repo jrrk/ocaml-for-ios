@@ -20,7 +20,7 @@
 #include "../../byterun/memory.h"
 #include "../../byterun/custom.h"
 #include "bigarray.h"
-#include "glue.h"
+#include "../../byterun/glue.h"
 
 #define int8 caml_ba_int8
 #define uint8 caml_ba_uint8

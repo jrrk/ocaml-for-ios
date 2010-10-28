@@ -126,16 +126,14 @@ static int sys_open_flags[] = {
   O_BINARY, O_TEXT, O_NONBLOCK
 };
 
-extern char *getPwd;
-
 static char *nodotfile(value path)
 {
 	char realp[MAXPATHLEN];
 	char *q = String_val(path);
 	char *r = realpath(q, realp);
 	char *p = caml_stat_alloc(strlen(realp) + 1);
-	if (strncmp(realp, getPwd, strlen(getPwd)))
-		sprintf(realp, "%sinvalid_file", getPwd);
+	if (strncmp(realp, getPwd(), strlen(getPwd())))
+		sprintf(realp, "%sinvalid_file", getPwd());
 	{
 		p = caml_stat_alloc(strlen(realp) + 1);
 		strcpy(p, realp);

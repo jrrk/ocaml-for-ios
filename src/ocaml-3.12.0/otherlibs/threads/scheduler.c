@@ -21,7 +21,7 @@
 #include "../../byterun/mlvalues.h"
 #include "../../byterun/memory.h"
 #include "../../byterun/custom.h"
-#include "glue.h"
+#include "../../byterun/glue.h"
 
 #include "../../byterun/alloc.h"
 #include "backtrace.h"

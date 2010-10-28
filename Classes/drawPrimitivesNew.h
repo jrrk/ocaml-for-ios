@@ -1,6 +1,7 @@
 enum {width = 81, height = 25};
 
 #import "cocos2d.h"
+#import "../src/ocaml-3.12.0/byterun/glue.h"
 
 const char *fullp(NSString *relPath);
 
@@ -27,10 +28,14 @@ const char *fullp(NSString *relPath);
 
 @interface TestDemo : CCLayer
 {
-	CCLabelTTF *textspace[height];
+	CCLabelTTF *label;
+	CCMenu *menu;
 }
+
 -(NSString*) title;
+
 -(void) update:(ccTime)dt;
+
 // returns a Scene that contains the TestDemo as the only child
 +(id) scene;
 

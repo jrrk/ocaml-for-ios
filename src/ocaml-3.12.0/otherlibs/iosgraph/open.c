@@ -24,11 +24,11 @@
 #include "../../byterun/memory.h"
 #include "../../byterun/fail.h"
 #include "graphstubs.h"
-#include "glue.h"
+#include "../../byterun/glue.h"
 
 static value gr_reset(void);
 //static long tid;
-static HANDLE threadHandle;
+//static HANDLE threadHandle;
 HWND grdisplay = NULL;
 int grscreen;
 COLORREF grwhite, grblack;
@@ -41,10 +41,8 @@ int grcolor;
 extern HFONT * grfont;
 MSG msg;
 
-//static char *szOcamlWindowClass = "OcamlWindowClass";
-int gr_initialized = 0;
 CAMLprim value caml_gr_clear_graph(void);
-HANDLE hInst;
+// HANDLE hInst;
 
 HFONT MyCreationFont(char *name)
 {
@@ -71,7 +69,7 @@ void SetCoordinates(HWND hwnd)
 void ResetForClose(void)
 {
 	gr_reset();
-        gr_initialized = 0;
+	gr_close();
 }
 
 static value gr_reset(void)
@@ -86,43 +84,21 @@ static value gr_reset(void)
 		queue(qReset,0,0,0,0);
         return Val_unit;
 }
-/*
-void SuspendGraphicThread(void)
-{
-        SuspendThread(threadHandle);
-}
-
-void ResumeGraphicThread(void)
-{
-        ResumeThread(threadHandle);
-}
-*/
-/* For handshake between the event handling thread and the main thread */
-static char * open_graph_errmsg;
 
 CAMLprim value caml_gr_open_graph(value arg)
-{  int x, y, w, h;
-	if (gr_initialized) return Val_unit;
-
-  gr_initialized = TRUE;
-  hInst = caml_stat_alloc(sizeof(HWND));
-  x = y = w = h = CW_USEDEFAULT;
-  sscanf(String_val(arg), "%dx%d+%d+%d", &w, &h, &x, &y);
-
-  gr_reset();
+{ 
+	gr_open();
+	gr_reset();
   /* Position the current point at origin */
   grwindow.grx = 0;
   grwindow.gry = 0;
 
-	if (open_graph_errmsg != NULL) gr_fail("%s", open_graph_errmsg);
 	return Val_unit;
 }
 
 CAMLprim value caml_gr_close_graph(void)
 {
-        if (gr_initialized) {
-			ResetForClose();
-        }
+		ResetForClose();
         return Val_unit;
 }
 
@@ -151,12 +127,6 @@ value caml_gr_resize_window (value vx, value vy)
 
 value caml_gr_open_subwindow(value vx, value vy, value width, value height)
 {
-	
-	int h = Int_val(height);
-	int w = Int_val(width);
-	int x = Int_val(vx);
-	int y = Int_val(vy);
-
 	return copy_string( "1" );
 }
 
@@ -249,5 +219,5 @@ void gr_fail(char *fmt, char *arg)
 
 void gr_check_open(void)
 {
-  if (!gr_initialized) gr_fail("graphic screen not opened", NULL);
+//  if (!gr_initialized) gr_fail("graphic screen not opened", NULL);
 }

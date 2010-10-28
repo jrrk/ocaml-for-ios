@@ -12,7 +12,6 @@
 // local import
 #import "drawPrimitivesNew.h"
 #include <unistd.h>
-#import "glue.h"
 
 #include <assert.h>
 #include <pthread.h>
@@ -28,27 +27,85 @@ static NSString *transitions[] = {
 
 typedef struct graphbuf {
 	int x, y, siz;
-	char *buf, *fnt;
+	const char *buf, *fnt;
 } graphbuf_t;
 
 enum {graph_siz=256};
 static char stdoutbuf[height][width];
 static graphbuf_t graphbuf[graph_siz];
 static int row, col;
-static int graph_head = 0, graph_tail = 0;
+static int graph_tail = 0;
 static pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
 static pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 
-void DrawText(const char *str, const char *fnt, int len, int x, int y, int siz)
+void render_text(graphbuf_t *crnt)
+{
+	NSStringEncoding enc = NSUTF8StringEncoding;
+	NSString *conv = [NSString stringWithCString:crnt->buf encoding:enc];
+	NSString *fnt = [NSString stringWithCString:crnt->fnt encoding:enc];
+	id uifont = [UIFont fontWithName:fnt size:crnt->siz];
+	if (uifont)
+	{
+		CGSize dimensions = [conv sizeWithFont:uifont];		
+		//	return [self initWithString:string dimensions:dim alignment:CCTextAlignmentCenter fontName:fnt fontSize:size];
+		//	CCTexture2D *texture = [[CCTexture2D alloc] initWithString:conv dimensions:dim alignment:UITextAlignmentLeft fontName:fnt fontSize:siz];
+		NSUInteger width = ccNextPOT(dimensions.width);
+		NSUInteger height = ccNextPOT(dimensions.height);
+		
+		CGColorSpaceRef	colorSpace = CGColorSpaceCreateDeviceGray();
+		unsigned char *data = calloc(height, width);
+		CGContextRef context = CGBitmapContextCreate(data, width, height, 8, width, colorSpace, kCGImageAlphaNone);
+		
+		if( context )
+		{
+			CGColorSpaceRelease(colorSpace);
+			
+			CGContextSetGrayFillColor(context, 1.0f, 1.0f);
+			CGContextTranslateCTM(context, 0.0f, height);
+			CGContextScaleCTM(context, 1.0f, -1.0f); //NOTE: NSString draws in UIKit referential i.e. renders upside-down compared to CGBitmapContext referential
+			
+			UIGraphicsPushContext(context);
+			
+			[conv drawInRect:CGRectMake(0, 0, dimensions.width, dimensions.height) withFont:uifont lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentLeft];
+			
+			UIGraphicsPopContext();
+			
+			CCTexture2D *texture = [[CCTexture2D alloc] initWithData:data pixelFormat:kCCTexture2DPixelFormat_A8 pixelsWide:width pixelsHigh:height contentSize:dimensions];
+			
+			// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+			// Needed states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_TEXTURE_COORD_ARRAY
+			// Unneeded states: GL_COLOR_ARRAY
+			glDisableClientState(GL_COLOR_ARRAY);
+			
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			
+			// glColor4ub(224,224,244,200);
+			[texture drawAtPoint: ccp(crnt->x,crnt->y)];
+			[texture release];
+			
+			glBlendFunc(CC_BLEND_SRC, CC_BLEND_DST);
+			
+			// restore default GL state
+			glEnableClientState(GL_COLOR_ARRAY);
+			CGContextRelease(context);
+		}
+		free(data);
+	}
+	else 
+		CCLOG(@"cocos2d: Texture2D: Font '%@' not found", fnt);
+}
+
+int DrawText(const char *str, const char *fnt, int len, int x, int y, int siz)
 {
 	graphbuf_t *crnt = graphbuf+graph_tail;
-	crnt->fnt = fnt;
+	crnt->fnt = strdup(fnt);
 	crnt->siz = siz;
 	crnt->x = x;
 	crnt->y = y;
 	crnt->buf = strdup(str);
 	if (++graph_tail == graph_siz)
-		graph_tail = 0;
+		--graph_tail;
+	return crnt-graphbuf;
 }
 
 Class nextAction()
@@ -100,101 +157,9 @@ Class restartAction()
 }
 
 static int gr_open_flag = 0, gr_close_flag = 0;
-#if 0
-- (id) initWithData:(const void*)data pixelFormat:(CCTexture2DPixelFormat)pixelFormat pixelsWide:(NSUInteger)width pixelsHigh:(NSUInteger)height contentSize:(CGSize)size
-{
-	if((self = [super init])) {
-		glGenTextures(1, &name_);
-		glBindTexture(GL_TEXTURE_2D, name_);
 
-		ccTexParams texParams = { GL_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE };
-		glBindTexture( GL_TEXTURE_2D, self.name );
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, texParams.minFilter );
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, texParams.magFilter );
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, texParams.wrapS );
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, texParams.wrapT );
-		
-		// Specify OpenGL texture image
-		
-		switch(pixelFormat)
-		{
-			case kCCTexture2DPixelFormat_RGBA8888:
-				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-				break;
-			case kCCTexture2DPixelFormat_RGBA4444:
-				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_SHORT_4_4_4_4, data);
-				break;
-			case kCCTexture2DPixelFormat_RGB5A1:
-				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_SHORT_5_5_5_1, data);
-				break;
-			case kCCTexture2DPixelFormat_RGB565:
-				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, data);
-				break;
-			case kCCTexture2DPixelFormat_A8:
-				glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, width, height, 0, GL_ALPHA, GL_UNSIGNED_BYTE, data);
-				break;
-			default:
-				[NSException raise:NSInternalInconsistencyException format:@""];
-				
-		}
-		
-		size_ = size;
-		width_ = width;
-		height_ = height;
-		format_ = pixelFormat;
-		maxS_ = size.width / (float)width;
-		maxT_ = size.height / (float)height;
-		
-		hasPremultipliedAlpha_ = NO;
-	}					
-	return self;
-}
-
-- (id) initWithString:(NSString*)string dimensions:(CGSize)dimensions alignment:(CCTextAlignment)alignment fontName:(NSString*)name fontSize:(CGFloat)size
-{
-	NSUInteger width = ccNextPOT(dimensions.width);
-	NSUInteger height = ccNextPOT(dimensions.height);
-	unsigned char*			data;
-	
-	CGContextRef			context;
-	CGColorSpaceRef			colorSpace;
-	id						uifont;
-	
-	colorSpace = CGColorSpaceCreateDeviceGray();
-	data = calloc(height, width);
-	context = CGBitmapContextCreate(data, width, height, 8, width, colorSpace, kCGImageAlphaNone);
-	
-	if( ! context ) {
-		free(data);
-		[self release];
-		return nil;
-	}
-	
-	CGColorSpaceRelease(colorSpace);
-	
-	
-	CGContextSetGrayFillColor(context, 1.0f, 1.0f);
-	CGContextTranslateCTM(context, 0.0f, height);
-	CGContextScaleCTM(context, 1.0f, -1.0f); //NOTE: NSString draws in UIKit referential i.e. renders upside-down compared to CGBitmapContext referential
-	
-	UIGraphicsPushContext(context);
-	
-        uifont = [UIFont fontWithName:name size:size];
-		[string drawInRect:CGRectMake(0, 0, dimensions.width, dimensions.height) withFont:uifont lineBreakMode:UILineBreakModeWordWrap alignment:alignment];
-	
-	if( ! uifont )
-		CCLOG(@"cocos2d: Texture2D: Font '%@' not found", name);
-	UIGraphicsPopContext();
-	
-	self = [self initWithData:data pixelFormat:kCCTexture2DPixelFormat_A8 pixelsWide:width pixelsHigh:height contentSize:dimensions];
-	CGContextRelease(context);
-	free(data);
-}
-#endif
 -(void) update: (ccTime) dt
 {
-	int idx = 0;
-	CGSize s = [[CCDirector sharedDirector] winSize];
 	if (gr_open_flag)
 	{
 		gr_open_flag = 0;
@@ -213,31 +178,12 @@ static int gr_open_flag = 0, gr_close_flag = 0;
 		
 		[[CCDirector sharedDirector] replaceScene: s];
 	}
-	else if (sceneIdx) while (graph_head != graph_tail)
-	{
-		graphbuf_t *crnt = graphbuf+graph_head;
-		if (++graph_head == graph_siz)
-			graph_head = 0;
-		
-		NSStringEncoding enc = NSUTF8StringEncoding;
-		NSString *conv = [NSString stringWithCString:crnt->buf encoding:enc];
-		NSString *font = [NSString stringWithCString:crnt->fnt encoding:enc];
-		CGSize dimensions = CGSizeZero; // {s.width, 20};
-#if 1
-		CCLabelTTF *mytextspace = [CCLabelTTF labelWithString: conv dimensions:dimensions alignment:CCTextAlignmentLeft fontName:font fontSize:crnt->siz];
-		[mytextspace setPosition: ccp(s.width/2+crnt->x, 380+crnt->y)];
-		[self addChild: mytextspace];
-#endif
+	else {
+		CGSize s = [[CCDirector sharedDirector] winSize];
+		menu.position = CGPointMake(s.width-150, s.height-30 );
+		[label setPosition: ccp(s.width-150, s.height-70)];
 	}
-	else for (idx = 0; idx < sizeof(textspace)/sizeof(*textspace); idx++)
-	{
-		const char *buf = stdoutbuf[idx];
-		stdoutbuf[idx][width-1] = 0;
-		NSStringEncoding enc = NSUTF8StringEncoding;
-		NSString *conv = [NSString stringWithCString:buf encoding:enc];
-		[textspace[idx] setString:conv];
-		[textspace[idx] setPosition: ccp(s.width/2, s.height-100-idx*20)];
-	}
+
 }
 
 void gr_open(void)
@@ -254,39 +200,22 @@ void gr_close(void)
 {
 	if( (self=[super init]) ) {
 		
-		int i;
-		
 		CGSize s = [[CCDirector sharedDirector] winSize];
 	
- 		CCLabelTTF *label = [CCLabelTTF labelWithString:[self title] fontName:@"Arial" fontSize:32];
+ 		label = [CCLabelTTF labelWithString:[self title] fontName:@"Arial" fontSize:32];
 		[self addChild: label];
-		[label setPosition: ccp(s.width*3/4, s.height-50)];
 
-		for (i = 0; i < sizeof(textspace)/sizeof(*textspace); i++)
-		{
-			CGSize dim = {s.width, 20};
-			textspace[i] = [CCLabelTTF labelWithString: @"" dimensions:dim alignment:CCTextAlignmentLeft fontName:@"Arial" fontSize:16];
-			[textspace[i] setPosition: ccp(s.width/2, s.height-100-i*20)];
-			[self addChild: textspace[i]];
-		}
-		
 		CCMenuItemImage *item1 = [CCMenuItemImage itemFromNormalImage:@"b1.png" selectedImage:@"b2.png" target:self selector:@selector(backCallback:)];
 		CCMenuItemImage *item2 = [CCMenuItemImage itemFromNormalImage:@"r1.png" selectedImage:@"r2.png" target:self selector:@selector(restartCallback:)];
 		CCMenuItemImage *item3 = [CCMenuItemImage itemFromNormalImage:@"f1.png" selectedImage:@"f2.png" target:self selector:@selector(nextCallback:)];
 		
-		CCMenu *menu = [CCMenu menuWithItems:item1, item2, item3, nil];
-		
-#if 0
-		menu.position = CGPointZero;
-		item1.position = ccp( s.width*3/4 - 100, s.height-100 );
-		item2.position = ccp( s.width*3/4, s.height-100 );
-		item3.position = ccp( s.width*3/4 + 100, s.height-100 );
-#else
-		menu.position = CGPointMake(s.width/2, 380 );
+		menu = [CCMenu menuWithItems:item1, item2, item3, nil];
+
+		// menu.position = CGPointMake(s.width/2, 380 );
 		item1.position = ccp( -100, 0 );
 		item2.position = ccp( 0, 0 );
 		item3.position = ccp( 100, 0 );
-#endif
+
 		[self addChild: menu z:-1];	
 
 		// update after action in run!
@@ -392,6 +321,19 @@ void gr_close(void)
 	// Anti-Aliased
 	glEnable(GL_LINE_SMOOTH);
 	ccDrawLine( ccp(0, 300), ccp(s.width, 300) );
+
+	for (int idx = 0; idx < height; idx++)
+	{
+		const char *buf = sceneIdx ? "":stdoutbuf[idx];
+		stdoutbuf[idx][width-1] = 0;
+		graphbuf_t crnt;
+		crnt.fnt = "Arial";
+		crnt.siz = 16;
+		crnt.x = s.width/20;
+		crnt.y = s.height-100-idx*20;
+		crnt.buf = buf;
+		render_text(&crnt);
+	}
 	
 	// restore original values
 	glLineWidth(1);
@@ -444,70 +386,10 @@ int shape_cnt = 0;
 		func_t *ptr = myqueue;
 		
 			CGSize s = [[CCDirector sharedDirector] winSize];
-
-	NSString *conv = [NSString stringWithFormat:@"%.5f",355.0/113.0];
-	NSString *fnt = @"Arial";
-	int siz = 24;
-    CGSize dimensions = [conv sizeWithFont:[UIFont fontWithName:fnt size:siz]];		
-//	return [self initWithString:string dimensions:dim alignment:CCTextAlignmentCenter fontName:fnt fontSize:size];
-//	CCTexture2D *texture = [[CCTexture2D alloc] initWithString:conv dimensions:dim alignment:UITextAlignmentLeft fontName:fnt fontSize:siz];
-	{
-		NSUInteger width = ccNextPOT(dimensions.width);
-		NSUInteger height = ccNextPOT(dimensions.height);
-		unsigned char*			data;
-		
-		CGContextRef			context;
-		CGColorSpaceRef			colorSpace;
-		id						uifont;
-		
-		colorSpace = CGColorSpaceCreateDeviceGray();
-		data = calloc(height, width);
-		context = CGBitmapContextCreate(data, width, height, 8, width, colorSpace, kCGImageAlphaNone);
-		
-		if( context ) {
-		
-		CGColorSpaceRelease(colorSpace);
-		
-		
-		CGContextSetGrayFillColor(context, 1.0f, 1.0f);
-		CGContextTranslateCTM(context, 0.0f, height);
-		CGContextScaleCTM(context, 1.0f, -1.0f); //NOTE: NSString draws in UIKit referential i.e. renders upside-down compared to CGBitmapContext referential
-		
-		UIGraphicsPushContext(context);
-		
-		{
-			uifont = [UIFont fontWithName:fnt size:siz];
-			[conv drawInRect:CGRectMake(0, 0, dimensions.width, dimensions.height) withFont:uifont lineBreakMode:UILineBreakModeWordWrap alignment:UITextAlignmentLeft];
-		}
-		
-		if( ! uifont )
-			CCLOG(@"cocos2d: Texture2D: Font '%@' not found", fnt);
-		UIGraphicsPopContext();
-		
-		CCTexture2D *texture = [[CCTexture2D alloc] initWithData:data pixelFormat:kCCTexture2DPixelFormat_A8 pixelsWide:width pixelsHigh:height contentSize:dimensions];
-
-	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
-	// Needed states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_TEXTURE_COORD_ARRAY
-	// Unneeded states: GL_COLOR_ARRAY
-	glDisableClientState(GL_COLOR_ARRAY);
-	
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	
-	glColor4ub(224,224,244,200);
-	[texture drawAtPoint: ccp(s.width/2,s.height/2)];
-	[texture release];
-	
-	glBlendFunc(CC_BLEND_SRC, CC_BLEND_DST);
-	
-	// restore default GL state
-	glEnableClientState(GL_COLOR_ARRAY);
-		CGContextRelease(context);
-		free(data);
-		}
-	}			
+#if 0
 			glEnable(GL_LINE_SMOOTH);
 			ccDrawLine( ccp(0, 1000), ccp(s.width, 1000) );
-			
+#endif			
 			while (ptr < qptr) {
 			pthread_mutex_lock(&mut);
 			switch (ptr->func) {
@@ -556,9 +438,13 @@ int shape_cnt = 0;
 					ccDrawPoly( myvertices, shape_cnt, NO);
 					break;
 				}
+				case qText:
+					render_text(graphbuf+ptr->arg1);
+					break;
 				default:
 				{
 					enum geom unknown = ptr->func;
+					printf("Unknown geom %d\n", unknown);
 					break;
 				}
 			}
@@ -576,7 +462,7 @@ int shape_cnt = 0;
 	return @"OCAML Graphics";
 }
 @end
-
+#if 0
 void setup();
 void update();
 void draw();
@@ -618,7 +504,7 @@ int read_fonts()
 	free((char *)dirname);
 	return 0;
 }
-
+#endif
 char removefrombuf(void)
 {
 	if (tail != head)
@@ -712,7 +598,7 @@ void LaunchThread()
 }
 
 //static int first;
-
+#if 0
 //--------------------------------------------------------------
 void testApp_setup()
 {	
@@ -730,7 +616,7 @@ void testApp_setup()
 	
 	LaunchThread();
 }
-
+#endif
 void stdout_puts(const char *buf)
 {
 	stdout_write(buf, strlen(buf));
@@ -753,7 +639,7 @@ int stdout_write(const char *buf, int len)
 		switch (*buf) {
 			default:
 				stdoutbuf[row][col++] = *buf;
-				if (col < width) break;
+				if (col < width-1) break;
 				col = 0;
 			case '\n':
 				if (++row == height)

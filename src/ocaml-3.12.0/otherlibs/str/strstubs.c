@@ -19,7 +19,7 @@
 #include "../../byterun/alloc.h"
 #include "../../byterun/memory.h"
 #include "../../byterun/fail.h"
-#include "glue.h"
+#include "../../byterun/glue.h"
 
 /* The backtracking NFA interpreter */
 

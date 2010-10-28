@@ -80,15 +80,13 @@ void caml_build_primitive_table(char * lib_path,
   char * tofree1;
   char * p;
 	char envstr[256];
-	
 	putenv("TERM=ansi");
-	sprintf(envstr, "HOME=%s/OcamlExample.app/ocaml-3.12.0/", getPwd);
+	sprintf(envstr, "HOME=%socaml-3.12.0/", getPwd());
 	putenv(strdup(envstr));
-	sprintf(envstr, "OCAMLLIB=%s/OcamlExample.app/ocaml-3.12.0/lib/ocaml/", getPwd);
+	sprintf(envstr, "OCAMLLIB=%socaml-3.12.0/lib/ocaml/", getPwd());
 	putenv(strdup(envstr));
-	sprintf(envstr, "CAML_LD_LIBRARY_PATH=%sOcamlExample.app/ocaml-3.12.0/lib/ocaml/:%s", getPwd, getPwd2);
+	sprintf(envstr, "CAML_LD_LIBRARY_PATH=%s:%socaml-3.12.0/lib/ocaml/", getPwd(), getPwd());
 	putenv(strdup(envstr));
-	
   /* Initialize the search path for dynamic libraries:
      - directories specified on the command line with the -I option
      - directories specified in the CAML_LD_LIBRARY_PATH
@@ -167,6 +165,7 @@ void * caml_dlopen(char *handle, int for_execution, int global)
 {
 	dltab *stable;
 	struct camlsyms *tptr, *table = dummy_camlsyms;
+#if 1
 	if (!strcmp(handle, "dllnums.so")) table = nat_camlsyms;
 	if (!strcmp(handle, "dllcamlstr.so")) table = str_camlsyms;
 	if (!strcmp(handle, "dllgraphics.so")) table = graph_camlsyms;
@@ -175,6 +174,7 @@ void * caml_dlopen(char *handle, int for_execution, int global)
 	if (!strcmp(handle, "dllbigarray.so")) table = bigarray_camlsyms;
 	if (!strcmp(handle, "dllthreads.so")) table = systhread_camlsyms;
 	if (!strcmp(handle, "dllvmthreads.so")) table = thread_camlsyms;
+#endif
 	for (tptr=table; tptr->ref; ++tptr)
 	{
 	}

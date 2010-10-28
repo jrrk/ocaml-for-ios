@@ -15,7 +15,7 @@
 
 /* Trace the instructions executed */
 
-#ifdef DEBUG
+#ifdef OCAML_DEBUG
 
 #include <stdio.h>
 #include <string.h>
