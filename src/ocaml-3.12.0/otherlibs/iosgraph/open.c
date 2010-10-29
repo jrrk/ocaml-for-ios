@@ -43,7 +43,7 @@ MSG msg;
 
 CAMLprim value caml_gr_clear_graph(void);
 // HANDLE hInst;
-
+#if 0
 HFONT MyCreationFont(char *name)
 {
    LOGFONT CurrentFont;
@@ -55,7 +55,7 @@ HFONT MyCreationFont(char *name)
    strcpy(CurrentFont.lfFaceName, name);  /* Courier */
    return (CreateFontIndirect(&CurrentFont));
 }
-
+#endif
 void SetCoordinates(HWND hwnd)
 {
         RECT rc;
