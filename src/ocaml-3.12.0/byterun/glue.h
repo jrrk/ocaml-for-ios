@@ -7,7 +7,12 @@
  *
  */
 
-extern const char *getPwd(void);
+extern char *pwd;
+extern char *pwd2;
+
+#define getPwd() pwd
+#define getPwd2() pwd2
+
 extern void LaunchThread(void);
 extern void wakethread(void);
 extern void gr_open(void);

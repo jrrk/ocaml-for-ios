@@ -44,19 +44,8 @@ else {
 
 }
 
-const char *getPwd(void)
-{
-	static char *pwd = 0;
-	if (!pwd)
-	{
-		NSAutoreleasePool *pool = [NSAutoreleasePool new];
-		pwd = fullp(@"Icon.png");
-		char *rslash = strrchr(pwd, '/');
-		if (rslash) rslash[1] = 0;
-		[pool release];
-	}
-	return pwd;
-}
+char *pwd = 0;
+char *pwd2 = 0;
 
 int main(int argc, char *argv[]) {
 	int retval;
@@ -68,6 +57,7 @@ int main(int argc, char *argv[]) {
 															YES);
 	NSString *dir1 = [dirArray objectAtIndex:0];
 	mydir = [dir1 UTF8String];
+#if 0
 	char realp[MAXPATHLEN];
 	NSMutableArray *imagePathComponents = [NSMutableArray arrayWithArray:[@"ocaml" pathComponents]];
 	NSString *file = [imagePathComponents lastObject];
@@ -78,6 +68,18 @@ int main(int argc, char *argv[]) {
 	NSString *fullpath = [myloadingBundle pathForResource:file ofType:nil inDirectory:imageDirectory];
 	const char* bundle_String = [fullpath UTF8String]; 
 	realpath(bundle_String, realp);
+#else
+	pwd2 = fullp(@"Icon.png");
+	char *rslash = strrchr(pwd2, '/');
+	if (rslash)
+	{
+		rslash[1] = 0;
+		pwd = strdup(pwd2);
+		*rslash = 0;
+		rslash = strrchr(pwd2, '/');
+		if (rslash) rslash[1] = 0;
+	}
+#endif
 	retval = chdir(mydir);
 	if (retval)
 	{
