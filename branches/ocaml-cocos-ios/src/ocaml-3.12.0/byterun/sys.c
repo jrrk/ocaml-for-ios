@@ -51,6 +51,7 @@
 #include "signals.h"
 #include "stacks.h"
 #include "sys.h"
+#include "glue.h"
 
 #ifndef _WIN32
 extern int errno;
@@ -132,8 +133,8 @@ static char *nodotfile(value path)
 	char *q = String_val(path);
 	char *r = realpath(q, realp);
 	char *p = caml_stat_alloc(strlen(realp) + 1);
-	if (strncmp(realp, getPwd(), strlen(getPwd())))
-		sprintf(realp, "%sinvalid_file", getPwd());
+	if (strncmp(realp, getPwd2(), strlen(getPwd2())))
+		sprintf(realp, "%sinvalid_file", getPwd2());
 	{
 		p = caml_stat_alloc(strlen(realp) + 1);
 		strcpy(p, realp);
