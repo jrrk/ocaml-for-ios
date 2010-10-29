@@ -14,6 +14,7 @@
 
 #include <math.h>
 #include <memory.h>
+
 #include "../../byterun/custom.h"
 #include "../../byterun/mlvalues.h"
 #include "../../byterun/alloc.h"
@@ -22,11 +23,13 @@
 #include "graphstubs.h"
 #include "../../byterun/glue.h"
 
-HDC gcMetaFile;
+#import <CoreGraphics/CGGeometry.h>
+
+//HDC gcMetaFile;
 int grdisplay_mode;
 int grremember_mode;
 static char *myfont = "Arial";
-static int mytextsize;
+static int mytextsize = 16;
 
 static value gr_draw_or_fill_arc(value vx, value vy, value vrx, value vry,
                                  value vstart, value vend, BOOL fill);
@@ -85,7 +88,7 @@ CAMLprim value caml_gr_draw_text(value text,value x)
 {
 		int len = Int_val(x);
 		char *str = String_val(text);
-		queue(qText, DrawText(str, myfont, len, grwindow.grx, grwindow.gry, mytextsize),0,0,0);
+		DrawText(str, len, grwindow.grx, grwindow.gry, mytextsize);
         return Val_unit;
 }
 
@@ -232,21 +235,25 @@ CAMLprim value caml_gr_get_mousey(void)
 CAMLprim value caml_gr_set_font(value fontname)
 {
         gr_check_open();
-        myfont = String_val(fontname);
-        return Val_unit;
+		myfont = strdup(String_val(fontname));
+        if (!DrawFont(myfont, mytextsize))
+			caml_invalid_argument (myfont);
+		return Val_unit;
 }
 
 CAMLprim value caml_gr_set_text_size (value sz)
 {
 		mytextsize = Int_val(sz);
-        return Val_unit;
+        if (!DrawFont(myfont, mytextsize))
+			caml_invalid_argument (myfont);
+		return Val_unit;
 }
 
 CAMLprim value caml_gr_draw_char(value chr)
 {
 	char str[1] = {Int_val(chr)};
 	gr_check_open();
-	queue(qText, DrawText(str, myfont, 1, grwindow.grx, grwindow.gry, mytextsize), 0, 0, 0);
+	DrawText(str, 1, grwindow.grx, grwindow.gry, mytextsize);
 	return Val_unit;
 }
 
@@ -254,7 +261,7 @@ CAMLprim value caml_gr_draw_string(value str)
 {
 	int len = string_length(str);
 	char *str1 = String_val(str);
-	queue(qText, DrawText(str1, myfont, len, grwindow.grx, grwindow.gry, mytextsize), 0, 0, 0);
+	DrawText(str1, len, grwindow.grx, grwindow.gry, mytextsize);
 	return Val_unit;
 }
 
@@ -278,18 +285,16 @@ CAMLprim value caml_gr_text_size(value str)
 CAMLprim value caml_gr_fill_poly(value vect)
 {
         int n_points, i;
-        POINT   pt;
         n_points = Wosize_val(vect);
         if (n_points < 3)
                 gr_fail("fill_poly: not enough points",0);
 	
-		queue(qBeginShape, 0, 0, 0, 0);
+		CGPoint *myvertices = calloc(n_points, sizeof(CGPoint));
         for( i = 0; i < n_points; i++ ){
-                pt.x = Int_val(Field(Field(vect,i),0));
-                pt.y = Wcvt(Int_val(Field(Field(vect,i),1)));
-				queue(qVertex, pt.x, pt.y, 0, 0);
+                myvertices[i].x = Int_val(Field(Field(vect,i),0));
+                myvertices[i].y = Wcvt(Int_val(Field(Field(vect,i),1)));
         }
-		queue(qEndShape, 0, 0, 0, 0);
+		queue(qShape, (long)myvertices, n_points, 0, 0);
         return Val_unit;
 }
 
