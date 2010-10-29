@@ -12,12 +12,12 @@ extern void LaunchThread(void);
 extern void wakethread(void);
 extern void gr_open(void);
 extern void gr_close(void);
-extern void DrawText(const char *str, const char *fnt, int len, int x, int y, int siz);
+extern int DrawText(const char *str, const char *fnt, int len, int x, int y, int siz);
 
 #define Nothing ((value) 0)
 	
 	enum geom {qEnd,qTriangle,qCircle,qEllipse,qLine,qRect,qCurve,qBezier,qSetLineWidth,
-		qSetColor,qBeginShape,qVertex,qEndShape,qFill,qSetFont,qReset};
+		qSetColor,qBeginShape,qVertex,qEndShape,qFill,qSetFont,qText,qReset};
 	
 	extern void queue(enum geom func, long arg1, long arg2, long arg3, long arg4);
 	extern void queue2(enum geom func, long arg1, long arg2, long arg3, long arg4, long arg5, long arg6, long arg7, long arg8);
