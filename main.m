@@ -16,7 +16,7 @@
 
 NSBundle		*myloadingBundle = nil;
 
-const char *fullp(NSString *relPath)
+char *fullp(NSString *relPath)
 {
 char realp[MAXPATHLEN];
 NSAutoreleasePool *pool = [NSAutoreleasePool new];
@@ -37,7 +37,7 @@ if( ! [relPath isAbsolutePath] )
 	return strdup(realp);
 	}	
 else {
-	const char *rel = strdup([relPath UTF8String]);
+	char *rel = strdup([relPath UTF8String]);
 	[pool release];
 	return rel;	
 }
@@ -46,15 +46,13 @@ else {
 
 const char *getPwd(void)
 {
-	static const char *pwd = 0;
+	static char *pwd = 0;
 	if (!pwd)
 	{
 		NSAutoreleasePool *pool = [NSAutoreleasePool new];
-		const char *tmp_pwd = fullp(@".");
-		char *new_pwd = (char *)malloc(strlen(tmp_pwd)+2);
-		sprintf(new_pwd, "%s/", tmp_pwd);
-		free((char *)tmp_pwd);
-		pwd = new_pwd;
+		pwd = fullp(@"Icon.png");
+		char *rslash = strrchr(pwd, '/');
+		if (rslash) rslash[1] = 0;
 		[pool release];
 	}
 	return pwd;
@@ -68,7 +66,18 @@ int main(int argc, char *argv[]) {
 	NSArray *dirArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
 															NSUserDomainMask,
 															YES);
-	mydir = [[dirArray objectAtIndex:0] UTF8String];
+	NSString *dir1 = [dirArray objectAtIndex:0];
+	mydir = [dir1 UTF8String];
+	char realp[MAXPATHLEN];
+	NSMutableArray *imagePathComponents = [NSMutableArray arrayWithArray:[@"ocaml" pathComponents]];
+	NSString *file = [imagePathComponents lastObject];
+	
+	[imagePathComponents removeLastObject];
+	NSString *imageDirectory = [NSString pathWithComponents:imagePathComponents];
+	
+	NSString *fullpath = [myloadingBundle pathForResource:file ofType:nil inDirectory:imageDirectory];
+	const char* bundle_String = [fullpath UTF8String]; 
+	realpath(bundle_String, realp);
 	retval = chdir(mydir);
 	if (retval)
 	{
