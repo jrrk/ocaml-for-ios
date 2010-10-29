@@ -18,32 +18,21 @@
 #include <fcntl.h>
 #include <dirent.h>
 
-
 static int sceneIdx=-1;
 static NSString *transitions[] = {
 	@"Test1",
 	@"Test2",
 };
 
-typedef struct graphbuf {
-	int x, y, siz;
-	const char *buf, *fnt;
-} graphbuf_t;
-
-enum {graph_siz=256};
 static char stdoutbuf[height][width];
-static graphbuf_t graphbuf[graph_siz];
 static int row, col;
-static int graph_tail = 0;
 static pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
 static pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 
-void render_text(graphbuf_t *crnt)
+static void render_text(const char *buf, id uifont, int siz, int x, int y)
 {
 	NSStringEncoding enc = NSUTF8StringEncoding;
-	NSString *conv = [NSString stringWithCString:crnt->buf encoding:enc];
-	NSString *fnt = [NSString stringWithCString:crnt->fnt encoding:enc];
-	id uifont = [UIFont fontWithName:fnt size:crnt->siz];
+	NSString *conv = [NSString stringWithCString:buf encoding:enc];
 	if (uifont)
 	{
 		CGSize dimensions = [conv sizeWithFont:uifont];		
@@ -80,7 +69,7 @@ void render_text(graphbuf_t *crnt)
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			
 			// glColor4ub(224,224,244,200);
-			[texture drawAtPoint: ccp(crnt->x,crnt->y)];
+			[texture drawAtPoint: ccp(x,y)];
 			[texture release];
 			
 			glBlendFunc(CC_BLEND_SRC, CC_BLEND_DST);
@@ -91,21 +80,6 @@ void render_text(graphbuf_t *crnt)
 		}
 		free(data);
 	}
-	else 
-		CCLOG(@"cocos2d: Texture2D: Font '%@' not found", fnt);
-}
-
-int DrawText(const char *str, const char *fnt, int len, int x, int y, int siz)
-{
-	graphbuf_t *crnt = graphbuf+graph_tail;
-	crnt->fnt = strdup(fnt);
-	crnt->siz = siz;
-	crnt->x = x;
-	crnt->y = y;
-	crnt->buf = strdup(str);
-	if (++graph_tail == graph_siz)
-		--graph_tail;
-	return crnt-graphbuf;
 }
 
 Class nextAction()
@@ -136,7 +110,6 @@ Class restartAction()
 	Class c = NSClassFromString(r);
 	return c;
 }
-
 
 #pragma mark -
 #pragma mark Base Class
@@ -200,7 +173,7 @@ void gr_close(void)
 {
 	if( (self=[super init]) ) {
 		
-		CGSize s = [[CCDirector sharedDirector] winSize];
+//		CGSize s = [[CCDirector sharedDirector] winSize];
 	
  		label = [CCLabelTTF labelWithString:[self title] fontName:@"Arial" fontSize:32];
 		[self addChild: label];
@@ -321,18 +294,15 @@ void gr_close(void)
 	// Anti-Aliased
 	glEnable(GL_LINE_SMOOTH);
 	ccDrawLine( ccp(0, 300), ccp(s.width, 300) );
-
+	int siz = 16;
+	id fnt = [UIFont fontWithName:@"Arial" size:siz];
 	for (int idx = 0; idx < height; idx++)
 	{
 		const char *buf = sceneIdx ? "":stdoutbuf[idx];
 		stdoutbuf[idx][width-1] = 0;
-		graphbuf_t crnt;
-		crnt.fnt = "Arial";
-		crnt.siz = 16;
-		crnt.x = s.width/20;
-		crnt.y = s.height-100-idx*20;
-		crnt.buf = buf;
-		render_text(&crnt);
+		int x = s.width/20;
+		int y = s.height-100-idx*20;
+		render_text(buf, fnt, siz, x, y);
 	}
 	
 	// restore original values
@@ -346,16 +316,19 @@ void gr_close(void)
 }
 @end
 
-enum {maxq = 65536};
+// enum {maxq = 65536};
 
 void *keyboard;
 
-typedef struct {
+typedef struct func_t {
 	enum geom func;
 	long arg1,arg2,arg3,arg4;
+	struct func_t *nxt;
 } func_t;
 
-static func_t *qptr, myqueue[maxq+1];
+static func_t *myqueue = NULL;
+static id uifont = 0;
+static int fontsiz = 16;
 
 @implementation Test2
 //
@@ -378,21 +351,9 @@ static func_t *qptr, myqueue[maxq+1];
 //    self.rotation = 90;
 //
 
-CGPoint myvertices[100];
-int shape_cnt = 0;
-
--(void) draw
-{
-		func_t *ptr = myqueue;
-		
-			CGSize s = [[CCDirector sharedDirector] winSize];
-#if 0
-			glEnable(GL_LINE_SMOOTH);
-			ccDrawLine( ccp(0, 1000), ccp(s.width, 1000) );
-#endif			
-			while (ptr < qptr) {
-			pthread_mutex_lock(&mut);
-			switch (ptr->func) {
+void draw_exec(func_t *ptr)
+	{
+		switch (ptr->func) {
 				case qRect:
 				{
 					CGPoint vertices[] = { ccp(ptr->arg1,ptr->arg2),
@@ -401,21 +362,25 @@ int shape_cnt = 0;
 											ccp(ptr->arg1+ptr->arg3,ptr->arg2),
 											ccp(ptr->arg1,ptr->arg2) };
 					ccDrawPoly( vertices, 5, NO);
+					ptr = ptr->nxt;
 					break;
 				}
 				case qLine:
 					glEnable(GL_LINE_SMOOTH);
 					ccDrawLine( ccp(ptr->arg1, ptr->arg2), ccp(ptr->arg3, ptr->arg4) );
+					ptr = ptr->nxt;
 					break;
 				case qSetColor:
 					glColor4ub(ptr->arg1, ptr->arg2, ptr->arg3, 255);
+					ptr = ptr->nxt;
 					break;
 				case qSetLineWidth:
 					glLineWidth(ptr->arg1);
+					ptr = ptr->nxt;
 					break;
 				case qCurve:
 					ccDrawCubicBezier(ccp(ptr->arg1, ptr->arg2), ccp(ptr->arg3, ptr->arg4), ccp(ptr[1].arg1, ptr[1].arg2), ccp(ptr[1].arg3, ptr[1].arg4), 100);
-					++ptr;
+					ptr = ptr->nxt;
 					break;
 				case qFill:
 				{
@@ -425,32 +390,47 @@ int shape_cnt = 0;
 						ccp(ptr->arg1+ptr->arg3,ptr->arg2),
 						ccp(ptr->arg1,ptr->arg2) };
 					ccDrawPoly( vertices, 5, YES);
+					ptr = ptr->nxt;
 					break;
 				}
-				case qBeginShape:
-					shape_cnt = 0;
-					break;
-				case qVertex:
-					myvertices[shape_cnt++] = ccp(ptr->arg1, ptr->arg2);
-					break;
-				case qEndShape:
+				case qShape:
 				{
-					ccDrawPoly( myvertices, shape_cnt, NO);
+					ccDrawPoly( (CGPoint *)(ptr->arg1), ptr->arg2, NO);
+					ptr = ptr->nxt;
 					break;
 				}
 				case qText:
-					render_text(graphbuf+ptr->arg1);
+					render_text((const char *)(ptr->arg1), uifont, ptr->arg2, ptr->arg3, ptr->arg4);
+					ptr = ptr->nxt;
+					break;
+				case qSetFont:
+					uifont = (id)(ptr->arg1);
+					fontsiz = ptr->arg2;
+					ptr = ptr->nxt;
 					break;
 				default:
 				{
 					enum geom unknown = ptr->func;
 					printf("Unknown geom %d\n", unknown);
+					ptr = 0;
 					break;
 				}
 			}
-			pthread_mutex_unlock(&mut);
-			++ptr;
 		}
+
+void draw_recurse(func_t *ptr)
+{
+	if (ptr->nxt) draw_recurse(ptr->nxt);
+	draw_exec(ptr);
+}
+
+-(void) draw
+{
+	fontsiz = 16;
+	uifont = [UIFont fontWithName:@"Arial" size:fontsiz];
+	pthread_mutex_lock(&mut);
+	if (myqueue) draw_recurse(myqueue);
+	pthread_mutex_unlock(&mut);
 	// restore original values
 	glLineWidth(1);
 	glColor4ub(255,255,255,255);
@@ -462,49 +442,7 @@ int shape_cnt = 0;
 	return @"OCAML Graphics";
 }
 @end
-#if 0
-void setup();
-void update();
-void draw();
-void wakethread();
-void exit();
-int load_of_font(const char *);
 
-void lostFocus();
-void gotFocus();
-void gotMemoryWarning();
-void deviceOrientationChanged(int newOrientation);
-
-void *keyboards[UIDeviceOrientationFaceDown+1];
-
-int dly;
-
-struct {
-	int x,y,z,r;
-	UIDeviceOrientation orient;
-} orientation, oldorient;
-
-int read_fonts()
-{
-	DIR * d;
-	struct dirent * e;
-	char *p;
-	const char *dirname = fullp(@".");
-	d = opendir(dirname);
-	if (d == NULL) return -1;
-	while (1) {
-		e = readdir(d);
-		if (e == NULL) break;
-		if (strcmp(e->d_name, ".") == 0 || strcmp(e->d_name, "..") == 0) continue;
-		p = (char *)malloc(strlen(e->d_name) + 1);
-		strcpy(p, e->d_name);
-		if (strstr(p, ".ttf")) load_of_font(p);
-	}
-	closedir(d);
-	free((char *)dirname);
-	return 0;
-}
-#endif
 char removefrombuf(void)
 {
 	if (tail != head)
@@ -545,7 +483,6 @@ char removefrombuf(void)
 void* PosixThreadMainRoutine(void* data)
 {
 	const char *init = "ocamlinit";
-	qptr = myqueue;
 	memset(stdoutbuf, ' ', sizeof stdoutbuf);
 	const char *ocaml = fullp(@"ocaml-3.12.0/bin/ocaml");
 	const char *ocamlinit = fullp(@"ocaml-3.12.0/ocamlinit");
@@ -734,37 +671,76 @@ int stdout_write(const char *buf, int len)
 	return open(combined_c, flags, mode);
 }
 #endif
- void queue(enum geom func, long arg1, long arg2, long arg3, long arg4)
+
+void qReset(void)
 {
 	pthread_mutex_lock(&mut);
-	qptr->func = func;
-	qptr->arg1 = arg1;
-	qptr->arg2 = arg2;
-	qptr->arg3 = arg3;
-	qptr->arg4 = arg4;	
-	if (qptr-myqueue < maxq) ++qptr;
-	qptr->func = qEnd;
-	if (func == qReset) qptr = myqueue;
+	while (myqueue) {
+		func_t *newqptr = myqueue->nxt;
+		free(myqueue);
+		myqueue = newqptr;
+	}
 	pthread_mutex_unlock(&mut);
 }
 
- void queue2(enum geom func, long arg1, long arg2, long arg3, long arg4, long arg5, long arg6, long arg7, long arg8)
+void queue(enum geom func, long arg1, long arg2, long arg3, long arg4)
 {
+	func_t *newqptr = calloc(1, sizeof (func_t));
 	pthread_mutex_lock(&mut);
-	qptr->func = func;
-	qptr->arg1 = arg1;
-	qptr->arg2 = arg2;
-	qptr->arg3 = arg3;
-	qptr->arg4 = arg4;	
-	if (qptr-myqueue < maxq) ++qptr;
-	qptr->func = func;
-	qptr->arg1 = arg5;
-	qptr->arg2 = arg6;
-	qptr->arg3 = arg7;
-	qptr->arg4 = arg8;	
-	if (qptr-myqueue < maxq) ++qptr;
-	qptr->func = qEnd;
+	newqptr->func = func;
+	newqptr->arg1 = arg1;
+	newqptr->arg2 = arg2;
+	newqptr->arg3 = arg3;
+	newqptr->arg4 = arg4;	
+	newqptr->nxt = myqueue;
+	myqueue = newqptr;
 	pthread_mutex_unlock(&mut);
 }
 
+void queue2(enum geom func, long arg1, long arg2, long arg3, long arg4, long arg5, long arg6, long arg7, long arg8)
+{
+	func_t *newqptr = calloc(2, sizeof (func_t));
+	pthread_mutex_lock(&mut);
+	newqptr[0].func = func;
+	newqptr[0].arg1 = arg1;
+	newqptr[0].arg2 = arg2;
+	newqptr[0].arg3 = arg3;
+	newqptr[0].arg4 = arg4;	
+	newqptr[0].nxt = myqueue;
+	newqptr[1].func = func;
+	newqptr[1].arg1 = arg5;
+	newqptr[1].arg2 = arg6;
+	newqptr[1].arg3 = arg7;
+	newqptr[1].arg4 = arg8;	
+	newqptr[1].nxt = myqueue;
+	myqueue = newqptr;
+	pthread_mutex_unlock(&mut);
+}
 
+void DrawText(const char *str, int len, int x, int y, int siz)
+{
+	func_t *newqptr = calloc(1, sizeof (func_t));
+	pthread_mutex_lock(&mut);
+	newqptr->func = qText;
+	newqptr->arg1 = (long)strdup(str);
+	newqptr->arg2 = siz;
+	newqptr->arg3 = x;
+	newqptr->arg4 = y;	
+	newqptr->nxt = myqueue;
+	myqueue = newqptr;
+	pthread_mutex_unlock(&mut);
+}
+
+int DrawFont(const char *font, int siz)
+{
+	NSStringEncoding enc = NSUTF8StringEncoding;
+	NSString *fnt = [NSString stringWithCString:font encoding:enc];
+	id uifont = [UIFont fontWithName:fnt size:siz];
+	if (uifont)
+	{
+		queue(qSetFont, (long)(void *)uifont, siz, 0, 0);
+		return 1;
+	}
+	else
+		return 0;
+}

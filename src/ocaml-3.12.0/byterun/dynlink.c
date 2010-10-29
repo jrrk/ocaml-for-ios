@@ -79,14 +79,14 @@ void caml_build_primitive_table(char * lib_path,
 {
   char * tofree1;
   char * p;
-	char envstr[256];
+	char *envstr;
 	putenv("TERM=ansi");
-	sprintf(envstr, "HOME=%socaml-3.12.0/", getPwd());
-	putenv(strdup(envstr));
-	sprintf(envstr, "OCAMLLIB=%socaml-3.12.0/lib/ocaml/", getPwd());
-	putenv(strdup(envstr));
-	sprintf(envstr, "CAML_LD_LIBRARY_PATH=%s:%socaml-3.12.0/lib/ocaml/", getPwd(), getPwd());
-	putenv(strdup(envstr));
+	asprintf(&envstr, "HOME=%socaml-3.12.0/", getPwd());
+	putenv(envstr);
+	asprintf(&envstr, "OCAMLLIB=%socaml-3.12.0/lib/ocaml/", getPwd());
+	putenv(envstr);
+	asprintf(&envstr, "CAML_LD_LIBRARY_PATH=%s:%socaml-3.12.0/lib/ocaml/", getPwd(), getPwd());
+	putenv(envstr);
   /* Initialize the search path for dynamic libraries:
      - directories specified on the command line with the -I option
      - directories specified in the CAML_LD_LIBRARY_PATH
@@ -140,10 +140,9 @@ void caml_build_primitive_table_builtin(void)
 
 typedef struct {
 	int siz;
-	const char *dllname;
+	char *dllname;
 	struct camlsyms sitem[0];
 } dltab;
-
 
 CAMLprim value caml_dummy(void)
 {

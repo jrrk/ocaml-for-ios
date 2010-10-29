@@ -17,14 +17,18 @@ extern void LaunchThread(void);
 extern void wakethread(void);
 extern void gr_open(void);
 extern void gr_close(void);
-extern int DrawText(const char *str, const char *fnt, int len, int x, int y, int siz);
+extern int DrawFont(const char *, int);
+
+extern void DrawText(const char *str, int len, int x, int y, int siz);
+// extern void render_text(const char *buf, void *uifont, int siz, int x, int y);
 
 #define Nothing ((value) 0)
 	
-	enum geom {qEnd,qTriangle,qCircle,qEllipse,qLine,qRect,qCurve,qBezier,qSetLineWidth,
-		qSetColor,qBeginShape,qVertex,qEndShape,qFill,qSetFont,qText,qReset};
+	enum geom {qUndefined,qTriangle,qCircle,qEllipse,qLine,qRect,qCurve,qBezier,qSetLineWidth,
+		qSetColor,qShape,qFill,qSetFont,qText};
 	
-	extern void queue(enum geom func, long arg1, long arg2, long arg3, long arg4);
+    extern void qReset(void);
+    extern void queue(enum geom func, long arg1, long arg2, long arg3, long arg4);
 	extern void queue2(enum geom func, long arg1, long arg2, long arg3, long arg4, long arg5, long arg6, long arg7, long arg8);
 	extern long unix_error_of_code (int errcode);
 	extern void unix_error (int errcode, char * cmdname, long arg) __attribute__ ((noreturn));

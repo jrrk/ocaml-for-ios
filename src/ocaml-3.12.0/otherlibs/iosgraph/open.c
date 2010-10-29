@@ -81,7 +81,7 @@ static value gr_reset(void)
         grwindow.grx = 0;
         grwindow.gry = 0;
         caml_gr_set_color(Val_long(0));
-		queue(qReset,0,0,0,0);
+		qReset();
         return Val_unit;
 }
 
