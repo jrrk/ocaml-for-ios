@@ -5,7 +5,9 @@
 If you came here because you installed OCAML for the iPad, take a moment to learn
 about the benefits of functional programming
 
-This application is pending review at the Apple Store just now. Further review stages may be needed due to the huge flexibility of the language.
+This application was recently approved at the Apple Store. The link to the executable is below. In due course I hope to upgrade to a Universal App.
+
+http://itunes.apple.com/app/ocamlexample/id396515573?mt=8#
 
 This language uses a lot of strange punctuation, although available on the built-in touch pad there may be three or four keypresses per character in some cases. An external wireless or wired keyboard is recommended. The wireless keyboard can be shared with a mac as well.
 
@@ -108,3 +110,7 @@ You may also find it useful to consult the library guide at:
 http://caml.inria.fr/pub/docs/manual-ocaml/libref/index.html
 
 As you can see, there are a lot of functions available, the majority of which should work just fine on the iPad. You need not be concerned about experimenting. Everything you do works inside a virtual machine, which checks everything you do, and whatever the virtual machine does is checked by iOS to be sure it is legal. If iOS returns an error this will be passed onto you in the gui in most cases.
+
+= Acknowledgements =
+
+This project would not have been possible without the generous publication of the ocaml source code by INRIA(links above), the patches for the iPad supplied by Toshiyuki Maeda http://web.yl.is.s.u-tokyo.ac.jp/~tosh/ocaml-on-iphone/ , and the object orientated GUI framework called cocos2d for iPhone ( http://www.cocos2d-iphone.org/ ) written by various authors. Last but not least, John O'Neill ( http://en.wikipedia.org/wiki/User:Jjron ) generously gave permission for his fine Camel picture to be used.
