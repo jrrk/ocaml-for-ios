@@ -247,9 +247,6 @@ extern int TextOut(void * arg1, int arg2, int arg3, char * arg4, int arg5) {
 	myputs(__FILE__,__LINE__); return 0; }
 extern int WaitForSingleObject(void *arg1,  int arg2) { 
 	myputs(__FILE__,__LINE__); return 0; }
-extern CAMLprim value caml_gr_wait_event_blocking(int arg) { 
-	myputs(__FILE__,__LINE__); return 0; }
-extern int caml_gr_wait_event_poll(void) { 
-	myputs(__FILE__,__LINE__); return 0; }
+
 extern int gr_open_graph_internal(value arg) { 
 	myputs(__FILE__,__LINE__); return 0; }

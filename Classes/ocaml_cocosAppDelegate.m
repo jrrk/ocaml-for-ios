@@ -14,10 +14,64 @@
 #import "drawPrimitivesNew.h"
 // #import "src/ofxiPhoneKeyboard.h"
 #import "RootViewController.h"
+#import "CCTouchDispatcher.h"
 
 @implementation ocaml_cocosAppDelegate
 
 @synthesize window;
+
+- (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
+{
+	UITouch *touch = [touches anyObject];
+	
+	if( touch ) {
+		CGPoint location = [touch locationInView: [touch view]];
+		
+		// IMPORTANT:
+		// The touches are always in "portrait" coordinates. You need to convert them to your current orientation
+		CGPoint convertedPoint = [[CCDirector sharedDirector] convertToGL:location];
+		
+		int kind = ButtonPress; int mouse_x = convertedPoint.x; int mouse_y = convertedPoint.y;
+		int button = 1; int key = 0;
+		
+		caml_gr_enqueue_event(kind, mouse_x, mouse_y,
+							  button, key);		
+	}		
+}
+
+- (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	
+}
+
+- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	UITouch *touch = [touches anyObject];
+	
+	if( touch ) {
+		CGPoint location = [touch locationInView: [touch view]];
+		
+		// IMPORTANT:
+		// The touches are always in "portrait" coordinates. You need to convert them to your current orientation
+		CGPoint convertedPoint = [[CCDirector sharedDirector] convertToGL:location];
+		
+		int kind = ButtonRelease; int mouse_x = convertedPoint.x; int mouse_y = convertedPoint.y;
+		int button = 1; int key = 0;
+		
+		caml_gr_enqueue_event(kind, mouse_x, mouse_y,
+							  button, key);
+	}	
+}
+
+- (void)ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	
+}
+
+-(void) registerWithTouchDispatcher
+{
+	[[CCTouchDispatcher sharedDispatcher] addStandardDelegate:self priority:0];
+}
 
 - (void) applicationDidFinishLaunching:(UIApplication*)application
 {
@@ -99,6 +153,9 @@
 	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
 	
 	[[CCDirector sharedDirector] runWithScene: [TestDemo scene]];	
+	
+	[self registerWithTouchDispatcher];
+	
 	LaunchThread();
 }
 
