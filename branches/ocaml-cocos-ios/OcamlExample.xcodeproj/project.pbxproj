@@ -186,6 +186,7 @@
 		6AE0910F12701CED00474E60 /* b1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AE0910E12701CED00474E60 /* b1.png */; };
 		6AE0911112701CFB00474E60 /* f1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AE0911012701CFB00474E60 /* f1.png */; };
 		6AE0911312701D0600474E60 /* r1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AE0911212701D0600474E60 /* r1.png */; };
+		6AE94816127B599E00555492 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6AE94815127B599E00555492 /* Default.png */; };
 		6AEBD8B51271FD83000789D9 /* alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 6AEBD8511271FD83000789D9 /* alloc.c */; };
 		6AEBD8B61271FD83000789D9 /* array.c in Sources */ = {isa = PBXBuildFile; fileRef = 6AEBD8531271FD83000789D9 /* array.c */; };
 		6AEBD8B71271FD83000789D9 /* backtrace.c in Sources */ = {isa = PBXBuildFile; fileRef = 6AEBD8541271FD83000789D9 /* backtrace.c */; };
@@ -739,6 +740,7 @@
 		6AE0910E12701CED00474E60 /* b1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b1.png; sourceTree = "<group>"; };
 		6AE0911012701CFB00474E60 /* f1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = f1.png; sourceTree = "<group>"; };
 		6AE0911212701D0600474E60 /* r1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = r1.png; sourceTree = "<group>"; };
+		6AE94815127B599E00555492 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		6AEBD8511271FD83000789D9 /* alloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = alloc.c; sourceTree = "<group>"; };
 		6AEBD8521271FD83000789D9 /* alloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = alloc.h; sourceTree = "<group>"; };
 		6AEBD8531271FD83000789D9 /* array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = array.c; sourceTree = "<group>"; };
@@ -1217,6 +1219,7 @@
 				50F414ED1069373D002A0D5E /* fps_images.png */,
 				50F414EE1069373D002A0D5E /* Icon.png */,
 				50F414EF1069373D002A0D5E /* Info.plist */,
+				6AE94815127B599E00555492 /* Default.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -2064,6 +2067,7 @@
 				6AD8EC141278009C00803EA7 /* Default-LandscapeRight.png in Resources */,
 				6AD8EC151278009C00803EA7 /* Default-Portrait.png in Resources */,
 				6AD8EC161278009C00803EA7 /* Default-PortraitUpsideDown.png in Resources */,
+				6AE94816127B599E00555492 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -180,8 +180,6 @@ static value gr_draw_or_fill_arc(value vx, value vy, value vrx, value vry,
                                  value vstart, value vend, BOOL fill)
 {
         int x, y, r_x, r_y, start, end;
-        int     x1, y1, x2, y2, x3, y3, x4, y4;
-        double cvt = 3.141592653/180.0;
 
         r_x = Int_val(vrx);
         r_y = Int_val(vry);
@@ -192,20 +190,7 @@ static value gr_draw_or_fill_arc(value vx, value vy, value vrx, value vry,
         start = Int_val(vstart);
         end   = Int_val(vend);
 
-        // Upper-left corner of bounding rect.
-        x1=     x - r_x;
-        y1=     y + r_y;
-        // Lower-right corner of bounding rect.
-        x2=     x + r_x;
-        y2=     y - r_y;
-        // Starting point
-        x3=x + (int)(100.0*cos(cvt*start));
-        y3=y + (int)(100.0*sin(cvt*start));
-        // Ending point
-        x4=x + (int)(100.0*cos(cvt*end));
-        y4=y + (int)(100.0*sin(cvt*end));
-
-		queue2(qCurve,x1, y1, x2, y2, x3, y3, x4, y4);
+		queue2(qArc,x, y, r_x, r_y, start, end, fill, 0);
         return Val_unit;
 }
 

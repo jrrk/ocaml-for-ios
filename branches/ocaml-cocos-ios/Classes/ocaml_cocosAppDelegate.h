@@ -10,7 +10,7 @@
 
 @class RootViewController;
 
-@interface ocaml_cocosAppDelegate : NSObject <UIApplicationDelegate, UITextFieldDelegate> {
+@interface ocaml_cocosAppDelegate : NSObject <UIApplicationDelegate, UITextFieldDelegate, CCStandardTouchDelegate, CCTargetedTouchDelegate> {
 	UIWindow			*window;
 	RootViewController	*viewController;
 	UITextField*			_textField;

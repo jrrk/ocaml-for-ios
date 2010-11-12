@@ -26,8 +26,9 @@ static NSString *transitions[] = {
 
 static char stdoutbuf[height][width];
 static int row, col;
-static pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
-static pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
+
+pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 
 static void render_text(const char *buf, id uifont, int siz, int x, int y)
 {
@@ -378,11 +379,20 @@ void draw_exec(func_t *ptr)
 					glLineWidth(ptr->arg1);
 					ptr = ptr->nxt;
 					break;
-				case qCurve:
-					ccDrawCubicBezier(ccp(ptr->arg1, ptr->arg2), ccp(ptr->arg3, ptr->arg4), ccp(ptr[1].arg1, ptr[1].arg2), ccp(ptr[1].arg3, ptr[1].arg4), 100);
-					ptr = ptr->nxt;
-					break;
-				case qFill:
+			case qArc:
+			{
+				float rad = sqrt(ptr->arg3*ptr->arg3 + ptr->arg4*ptr->arg4); 
+				float ang = M_PI*2;
+				int segments = 100;
+				ccDrawCircle(ccp(ptr->arg1,ptr->arg2), rad, ang, segments, false);
+				ptr = ptr->nxt;
+				break;
+			}
+			case qCurve:
+				ccDrawCubicBezier(ccp(ptr->arg1, ptr->arg2), ccp(ptr->arg3, ptr->arg4), ccp(ptr[1].arg1, ptr[1].arg2), ccp(ptr[1].arg3, ptr[1].arg4), 100);
+				ptr = ptr->nxt;
+				break;
+			case qFill:
 				{
 					CGPoint vertices[] = { ccp(ptr->arg1,ptr->arg2),
 						ccp(ptr->arg1,ptr->arg2+ptr->arg4),
@@ -428,9 +438,9 @@ void draw_recurse(func_t *ptr)
 {
 	fontsiz = 16;
 	uifont = [UIFont fontWithName:@"Arial" size:fontsiz];
-	pthread_mutex_lock(&mut);
+	my_mutex_lock(&mut);
 	if (myqueue) draw_recurse(myqueue);
-	pthread_mutex_unlock(&mut);
+	my_mutex_unlock(&mut);
 	// restore original values
 	glLineWidth(1);
 	glColor4ub(255,255,255,255);
@@ -462,11 +472,11 @@ char removefrombuf(void)
 	int cnt = 0;
 	do {
 		do {
-			pthread_mutex_lock(&mut);
+			my_mutex_lock(&mut);
 			ch = removefrombuf();
+			my_mutex_unlock(&mut);
 			if (ch == -1)
 				pthread_cond_wait(&cond, &mut);
-			pthread_mutex_unlock(&mut);
 		}
 		while (ch == -1);
 		if (ch)
@@ -478,6 +488,36 @@ char removefrombuf(void)
 		stdout_write(&ch, 1);
 	} while ((cnt < siz) && (ch != '\n'));
 	return cnt;
+}
+
+int myselect(void)
+{
+	char ch;
+	int cnt = 0;
+		do {
+			my_mutex_lock(&mut);
+			ch = removefrombuf();
+			my_mutex_unlock(&mut);
+			if (ch == -1)
+				mysleep();
+		}
+		while (ch == -1);
+	return ch;
+}
+
+int mysleep(void)
+{
+	pthread_cond_wait(&cond, &mut);
+}
+
+void my_mutex_lock(pthread_mutex_t *p)
+{
+	
+}
+
+void my_mutex_unlock(pthread_mutex_t *p)
+{
+	
 }
 
 void* PosixThreadMainRoutine(void* data)
@@ -561,9 +601,9 @@ void stdout_puts(const char *buf)
 
 void wakethread()
 {
-	pthread_mutex_lock(&mut);
+//	my_mutex_lock(&mut);
 	pthread_cond_broadcast(&cond);
-	pthread_mutex_unlock(&mut);
+//	my_mutex_unlock(&mut);
 }
 
 int stdout_write(const char *buf, int len)
@@ -571,7 +611,7 @@ int stdout_write(const char *buf, int len)
 	const char *bufend = buf+len;
 	unsigned arg[20];
 	int Line, Column, Mode, Seq;
-	pthread_mutex_lock(&mut);
+	my_mutex_lock(&mut);
 	while (buf<bufend) {
 		switch (*buf) {
 			default:
@@ -639,7 +679,7 @@ int stdout_write(const char *buf, int len)
 		}
 		++buf;
 	}
-	pthread_mutex_unlock(&mut);
+	my_mutex_unlock(&mut);
 	//	pthread_cond_wait(&cond, &mut);
 	return len;
 }
@@ -674,19 +714,19 @@ int stdout_write(const char *buf, int len)
 
 void qReset(void)
 {
-	pthread_mutex_lock(&mut);
+	my_mutex_lock(&mut);
 	while (myqueue) {
 		func_t *newqptr = myqueue->nxt;
 		free(myqueue);
 		myqueue = newqptr;
 	}
-	pthread_mutex_unlock(&mut);
+	my_mutex_unlock(&mut);
 }
 
 void queue(enum geom func, long arg1, long arg2, long arg3, long arg4)
 {
 	func_t *newqptr = calloc(1, sizeof (func_t));
-	pthread_mutex_lock(&mut);
+	my_mutex_lock(&mut);
 	newqptr->func = func;
 	newqptr->arg1 = arg1;
 	newqptr->arg2 = arg2;
@@ -694,13 +734,13 @@ void queue(enum geom func, long arg1, long arg2, long arg3, long arg4)
 	newqptr->arg4 = arg4;	
 	newqptr->nxt = myqueue;
 	myqueue = newqptr;
-	pthread_mutex_unlock(&mut);
+	my_mutex_unlock(&mut);
 }
 
 void queue2(enum geom func, long arg1, long arg2, long arg3, long arg4, long arg5, long arg6, long arg7, long arg8)
 {
 	func_t *newqptr = calloc(2, sizeof (func_t));
-	pthread_mutex_lock(&mut);
+	my_mutex_lock(&mut);
 	newqptr[0].func = func;
 	newqptr[0].arg1 = arg1;
 	newqptr[0].arg2 = arg2;
@@ -714,13 +754,13 @@ void queue2(enum geom func, long arg1, long arg2, long arg3, long arg4, long arg
 	newqptr[1].arg4 = arg8;	
 	newqptr[1].nxt = myqueue;
 	myqueue = newqptr;
-	pthread_mutex_unlock(&mut);
+	my_mutex_unlock(&mut);
 }
 
 void DrawText(const char *str, int len, int x, int y, int siz)
 {
 	func_t *newqptr = calloc(1, sizeof (func_t));
-	pthread_mutex_lock(&mut);
+	my_mutex_lock(&mut);
 	newqptr->func = qText;
 	newqptr->arg1 = (long)strdup(str);
 	newqptr->arg2 = siz;
@@ -728,7 +768,7 @@ void DrawText(const char *str, int len, int x, int y, int siz)
 	newqptr->arg4 = y;	
 	newqptr->nxt = myqueue;
 	myqueue = newqptr;
-	pthread_mutex_unlock(&mut);
+	my_mutex_unlock(&mut);
 }
 
 int DrawFont(const char *font, int siz)
