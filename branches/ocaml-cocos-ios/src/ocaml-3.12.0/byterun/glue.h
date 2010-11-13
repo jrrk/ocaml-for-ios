@@ -79,6 +79,7 @@ extern pthread_cond_t cond;
 
 extern char *pwd;
 extern char *pwd2;
+extern char *window_title;
 
 #define getPwd() pwd
 #define getPwd2() pwd2

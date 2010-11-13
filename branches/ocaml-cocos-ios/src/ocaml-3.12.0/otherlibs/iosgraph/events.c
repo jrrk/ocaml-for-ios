@@ -40,6 +40,18 @@ struct event_data {
 static struct event_data caml_gr_queue[SIZE_QUEUE];
 static unsigned int caml_gr_head = 0;       /* position of next read */
 static unsigned int caml_gr_tail = 0;       /* position of next write */
+static int last_mouse_x, last_mouse_y;
+
+CAMLprim value caml_gr_get_mousex(void)
+{
+	return last_mouse_x;
+}
+
+CAMLprim value caml_gr_get_mousey(void)
+{
+	return last_mouse_y;
+}
+
 
 #define QueueIsEmpty (caml_gr_tail == caml_gr_head)
 
@@ -47,6 +59,8 @@ void caml_gr_enqueue_event(int kind, int mouse_x, int mouse_y,
 								  int button, int key)
 {
 	struct event_data * ev;
+	last_mouse_x = mouse_x;
+	last_mouse_y = mouse_y;
 	
 //	my_mutex_lock(&mut);	
 	ev = &(caml_gr_queue[caml_gr_tail]);
@@ -71,7 +85,7 @@ static value caml_gr_wait_allocate_result(int mouse_x, int mouse_y, int button,
 {
 	value res = alloc_small(5, 0);
 	Field(res, 0) = Val_int(mouse_x);
-	Field(res, 1) = Val_int(mouse_y == -1 ? -1 : Wcvt(mouse_y));
+	Field(res, 1) = Val_int(mouse_y == -1 ? -1 : (mouse_y));
 	Field(res, 2) = Val_bool(button);
 	Field(res, 3) = Val_bool(keypressed);
 	Field(res, 4) = Val_int(key & 0xFF);

@@ -173,9 +173,7 @@ void gr_close(void)
 -(id) init
 {
 	if( (self=[super init]) ) {
-		
-//		CGSize s = [[CCDirector sharedDirector] winSize];
-	
+			
  		label = [CCLabelTTF labelWithString:[self title] fontName:@"Arial" fontSize:32];
 		[self addChild: label];
 
@@ -203,6 +201,22 @@ void gr_close(void)
 -(void) dealloc
 {
 	[super dealloc];
+}
+
+#define Val_long(x)     (((long)(x) << 1) + 1)
+
+long caml_gr_size_x(void)
+{
+	CGSize s = [[CCDirector sharedDirector] winSize];
+	gr_check_open();
+	return Val_long(s.width);
+}
+
+long caml_gr_size_y(void)
+{
+	CGSize s = [[CCDirector sharedDirector] winSize];
+	gr_check_open();
+	return Val_long(s.height);
 }
 
 -(void) newOrientation

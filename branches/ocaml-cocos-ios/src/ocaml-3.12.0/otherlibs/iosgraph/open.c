@@ -27,8 +27,11 @@
 #include "../../byterun/glue.h"
 
 static value gr_reset(void);
+int grdisplay_mode;
+int grremember_mode;
 //static long tid;
 //static HANDLE threadHandle;
+#if 0
 HWND grdisplay = NULL;
 int grscreen;
 COLORREF grwhite, grblack;
@@ -40,7 +43,7 @@ int grx, gry;
 int grcolor;
 extern HFONT * grfont;
 MSG msg;
-
+#endif
 CAMLprim value caml_gr_clear_graph(void);
 // HANDLE hInst;
 #if 0
@@ -55,7 +58,6 @@ HFONT MyCreationFont(char *name)
    strcpy(CurrentFont.lfFaceName, name);  /* Courier */
    return (CreateFontIndirect(&CurrentFont));
 }
-#endif
 void SetCoordinates(HWND hwnd)
 {
         RECT rc;
@@ -65,6 +67,7 @@ void SetCoordinates(HWND hwnd)
         grwindow.height = rc.bottom;
         gr_reset();
 }
+#endif
 
 void ResetForClose(void)
 {
@@ -75,11 +78,12 @@ void ResetForClose(void)
 static value gr_reset(void)
 {
         int screenx,screeny;
-
+#if 0
         screenx = GetSystemMetrics(SM_CXSCREEN);
         screeny = GetSystemMetrics(SM_CYSCREEN);
         grwindow.grx = 0;
         grwindow.gry = 0;
+#endif
         caml_gr_set_color(Val_long(0));
 		qReset();
         return Val_unit;
@@ -90,9 +94,10 @@ CAMLprim value caml_gr_open_graph(value arg)
 	gr_open();
 	gr_reset();
   /* Position the current point at origin */
-  grwindow.grx = 0;
+#if 0
+	grwindow.grx = 0;
   grwindow.gry = 0;
-
+#endif
 	return Val_unit;
 }
 
@@ -138,28 +143,9 @@ value caml_gr_close_subwindow(value wid)
 CAMLprim value caml_gr_clear_graph(void)
 {
         gr_check_open();
-        if(grremember_mode) {
-                BitBlt(grwindow.gcBitmap,0,0,grwindow.width,grwindow.height,
-                        grwindow.gcBitmap,0,0,WHITENESS);
-        }
-        if(grdisplay_mode) {
-                BitBlt(grwindow.gc,0,0,grwindow.width,grwindow.height,
-                        grwindow.gc,0,0,WHITENESS);
-        }
-        return Val_unit;
+       return Val_unit;
 }
 
-CAMLprim value caml_gr_size_x(void)
-{
-        gr_check_open();
-        return Val_int(grwindow.width);
-}
-
-CAMLprim value caml_gr_size_y(void)
-{
-        gr_check_open();
-        return Val_int(grwindow.height);
-}
 #if 0
 CAMLprim value caml_gr_resize_window (value vx, value vy)
 {
@@ -173,8 +159,6 @@ CAMLprim value caml_gr_resize_window (value vx, value vy)
 CAMLprim value caml_gr_synchronize(void)
 {
         gr_check_open();
-        BitBlt(grwindow.gc,0,0,grwindow.width,grwindow.height,
-                grwindow.gcBitmap,0,0,SRCCOPY);
         return Val_unit ;
 }
 

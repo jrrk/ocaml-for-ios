@@ -26,10 +26,9 @@
 #import <CoreGraphics/CGGeometry.h>
 
 //HDC gcMetaFile;
-int grdisplay_mode;
-int grremember_mode;
 static char *myfont = "Arial";
 static int mytextsize = 16;
+static struct { int grx, gry; } grwindow;
 
 static value gr_draw_or_fill_arc(value vx, value vy, value vrx, value vry,
                                  value vstart, value vend, BOOL fill);
@@ -76,7 +75,7 @@ CAMLprim value caml_gr_draw_rect(value vx, value vy, value vw, value vh)
         int     x, y, w, h;
 
 		x=Int_val(vx);
-        y=Wcvt(Int_val(vy));
+        y=(Int_val(vy));
         w=Int_val(vw);
         h=Int_val(vh);
 
@@ -104,21 +103,31 @@ CAMLprim value caml_gr_fill_rect(value vx, value vy, value vw, value vh)
         return Val_unit;
 }
 
+void mysound(int freq, int dur)
+{
+	// here goes playSound ??
+}
+
 CAMLprim value caml_gr_sound(value freq, value vdur)
 {
-        Beep(freq,vdur);
+        mysound(Int_val(freq),Int_val(vdur));
         return Val_unit;
+}
+
+int MyGetPixel(int x, int y)
+{
+	return 0; // need to put something here
 }
 
 CAMLprim value caml_gr_point_color(value vx, value vy)
 {
         int x = Int_val(vx);
         int y = Int_val(vy);
-        COLORREF rgb;
+        long rgb;
         unsigned long b,g,r;
 
         gr_check_open();
-        rgb = GetPixel(grwindow.gcBitmap,x,Wcvt(y));
+	rgb = MyGetPixel(x, y);
         b = (unsigned long)((rgb & 0xFF0000) >> 16);
         g = (unsigned long)((rgb & 0x00FF00) >> 8);
         r = (unsigned long)(rgb & 0x0000FF);
@@ -127,20 +136,15 @@ CAMLprim value caml_gr_point_color(value vx, value vy)
 
 CAMLprim value caml_gr_circle(value x,value y,value radius)
 {
-        int left,top,right,bottom;
-
-        gr_check_open();
-        left = x - radius/2;
-        top = Wcvt(y) - radius/2;
-        right = left+radius;
-        bottom = top+radius;
-        Ellipse(grwindow.gcBitmap,left,top,right,bottom);
-        return Val_unit;
+	return gr_draw_or_fill_arc(x, y, radius, radius,
+							   0, 360, FALSE);
 }
+
+char *window_title = "";
 
 CAMLprim value caml_gr_set_window_title(value text)
 {
-        SetWindowText(grwindow.hwnd,(char *)text);
+        window_title = strdup((char *)text);
         return Val_unit;
 }
 
@@ -196,25 +200,11 @@ static value gr_draw_or_fill_arc(value vx, value vy, value vrx, value vry,
 
 CAMLprim value caml_gr_show_bitmap(value filename,int x,int y)
 {
-        AfficheBitmap(filename,grwindow.gcBitmap,x,Wcvt(y));
-        AfficheBitmap(filename,grwindow.gc,x,Wcvt(y));
+#if 0
+        AfficheBitmap(filename,grwindow.gcBitmap,x,(y));
+        AfficheBitmap(filename,grwindow.gc,x,(y));
+#endif
         return Val_unit;
-}
-
-CAMLprim value caml_gr_get_mousex(void)
-{
-        POINT pt;
-        GetCursorPos(&pt);
-        MapWindowPoints(HWND_DESKTOP,grwindow.hwnd,&pt,1);
-        return pt.x;
-}
-
-CAMLprim value caml_gr_get_mousey(void)
-{
-        POINT pt;
-        GetCursorPos(&pt);
-        MapWindowPoints(HWND_DESKTOP,grwindow.hwnd,&pt,1);
-        return grwindow.height - pt.y - 1;
 }
 
 CAMLprim value caml_gr_set_font(value fontname)
@@ -252,17 +242,19 @@ CAMLprim value caml_gr_draw_string(value str)
 
 CAMLprim value caml_gr_text_size(value str)
 {
-        SIZE extent;
+        int cx, cy;
         value res;
 
         mlsize_t len = string_length(str);
         if (len > 32767) len = 32767;
 
-        GetTextExtentPoint(grwindow.gc,String_val(str), len,&extent);
+//        GetTextExtentPoint(grwindow.gc,String_val(str), len,&extent);
 
+		cx = 1;
+		cy = 1;
         res = alloc_tuple(2);
-        Field(res, 0) = Val_long(extent.cx);
-        Field(res, 1) = Val_long(extent.cy);
+        Field(res, 0) = Val_long(cx);
+        Field(res, 1) = Val_long(cy);
 
         return res;
 }
@@ -277,7 +269,7 @@ CAMLprim value caml_gr_fill_poly(value vect)
 		CGPoint *myvertices = calloc(n_points, sizeof(CGPoint));
         for( i = 0; i < n_points; i++ ){
                 myvertices[i].x = Int_val(Field(Field(vect,i),0));
-                myvertices[i].y = Wcvt(Int_val(Field(Field(vect,i),1)));
+                myvertices[i].y = (Int_val(Field(Field(vect,i),1)));
         }
 		queue(qShape, (long)myvertices, n_points, 0, 0);
         return Val_unit;
@@ -298,8 +290,8 @@ CAMLprim value caml_gr_fill_arc_nat(int vx, int vy, int vrx, int vry, int vstart
 struct image {
         int w;
         int h;
-        HBITMAP data;
-        HBITMAP mask;
+        void * data;
+        void * mask;
 };
 
 #define Width(i) (((struct image *)Data_custom_val(i))->w)
@@ -307,13 +299,12 @@ struct image {
 #define Data(i) (((struct image *)Data_custom_val(i))->data)
 #define Mask(i) (((struct image *)Data_custom_val(i))->mask)
 #define Max_image_mem 500000
-
+#if 1
 static void finalize_image (value i)
 {
-        DeleteObject (Data(i));
-        if (Mask(i) != NULL) DeleteObject(Mask(i));
+        free (Data(i));
+        if (Mask(i) != NULL) free(Mask(i));
 }
-
 static struct custom_operations image_ops = {
         "_image",
         finalize_image,
@@ -325,7 +316,7 @@ static struct custom_operations image_ops = {
 
 CAMLprim value caml_gr_create_image(value vw, value vh)
 {
-        HBITMAP cbm;
+        void * cbm;
         value res;
         int w = Int_val(vw);
         int h = Int_val(vh);
@@ -333,9 +324,6 @@ CAMLprim value caml_gr_create_image(value vw, value vh)
         if (w < 0 || h < 0)
                 gr_fail("create_image: width and height must be positive",0);
 
-        cbm = CreateCompatibleBitmap(grwindow.gc, w, h);
-        if (cbm == NULL)
-                gr_fail("create_image: cannot create bitmap", 0);
         res = alloc_custom(&image_ops, sizeof(struct image),
                 w * h, Max_image_mem);
         if (res) {
@@ -346,114 +334,23 @@ CAMLprim value caml_gr_create_image(value vw, value vh)
         }
         return res;
 }
+#endif
 
 CAMLprim value caml_gr_blit_image (value i, value x, value y)
 {
-        HBITMAP oldBmp = SelectObject(grwindow.tempDC,Data(i));
         int xsrc = Int_val(x);
-        int ysrc = Wcvt(Int_val(y) + Height(i) - 1);
-        BitBlt(grwindow.tempDC,0, 0, Width(i), Height(i),
-                grwindow.gcBitmap, xsrc, ysrc, SRCCOPY);
-        SelectObject(grwindow.tempDC,oldBmp);
+        int ysrc = (Int_val(y) + Height(i) - 1);
         return Val_unit;
 }
 
 
 CAMLprim value caml_gr_draw_image(value i, value x, value y)
 {
-        HBITMAP oldBmp;
+        void * oldBmp;
 
         int xdst = Int_val(x);
-        int ydst = Wcvt(Int_val(y)+Height(i)-1);
-        if (Mask(i) == NULL) {
-                if (grremember_mode) {
-                        oldBmp = SelectObject(grwindow.tempDC,Data(i));
-                        BitBlt(grwindow.gcBitmap,xdst, ydst, Width(i), Height(i),
-                                grwindow.tempDC, 0, 0, SRCCOPY);
-                        SelectObject(grwindow.tempDC,oldBmp);
-                }
-                if (grdisplay_mode) {
-                        oldBmp = SelectObject(grwindow.tempDC,Data(i));
-                        BitBlt(grwindow.gc,xdst, ydst, Width(i), Height(i),
-                                grwindow.tempDC, 0, 0, SRCCOPY);
-                        SelectObject(grwindow.tempDC,oldBmp);
-                }
-        }
-        else {
-                if (grremember_mode) {
-                        oldBmp = SelectObject(grwindow.tempDC,Mask(i));
-                        BitBlt(grwindow.gcBitmap,xdst, ydst, Width(i), Height(i),
-                                grwindow.tempDC, 0, 0, SRCAND);
-                        SelectObject(grwindow.tempDC,Data(i));
-                        BitBlt(grwindow.gcBitmap,xdst, ydst, Width(i), Height(i),
-                                grwindow.tempDC, 0, 0, SRCPAINT);
-                        SelectObject(grwindow.tempDC,oldBmp);
-                }
-                if (grdisplay_mode) {
-                        oldBmp = SelectObject(grwindow.tempDC,Mask(i));
-                        BitBlt(grwindow.gc,xdst, ydst, Width(i), Height(i),
-                                grwindow.tempDC, 0, 0, SRCAND);
-                        SelectObject(grwindow.tempDC,Data(i));
-                        BitBlt(grwindow.gc,xdst, ydst, Width(i), Height(i),
-                                grwindow.tempDC, 0, 0, SRCPAINT);
-                        SelectObject(grwindow.tempDC,oldBmp);
-                }
-        }
-
+        int ydst = (Int_val(y)+Height(i)-1);
         return Val_unit;
-}
-
-CAMLprim value caml_gr_make_image(value matrix)
-{
-        int width, height,has_transp,i,j;
-        value img;
-        HBITMAP oldBmp;
-        height = Wosize_val(matrix);
-        if (height == 0) {
-                width = 0;
-        }
-        else {
-                width = Wosize_val(Field(matrix, 0));
-                for (i = 1; i < height; i++) {
-                        if (width != (int) Wosize_val(Field(matrix, i)))
-                                gr_fail("make_image: non-rectangular matrix",0);
-                }
-        }
-        Begin_roots1(matrix)
-                img = caml_gr_create_image(Val_int(width), Val_int(height));
-        End_roots();
-        has_transp = 0;
-        oldBmp = SelectObject(grwindow.tempDC,Data(img));
-        for (i = 0; i < height; i++) {
-                for (j = 0; j < width; j++) {
-                        int col = Long_val (Field (Field (matrix, i), j));
-                        if (col == -1){
-                                has_transp = 1;
-                                SetPixel(grwindow.tempDC,j, i, 0);
-                        }
-                        else {
-                                int red = (col >> 16) & 0xFF;
-                                int green = (col >> 8) & 0xFF;
-                                int blue = col & 0xFF;
-                                SetPixel(grwindow.tempDC,j, i, RGB(red, green, blue));
-                        }
-                }
-        }
-        SelectObject(grwindow.tempDC,oldBmp);
-        if (has_transp) {
-                HBITMAP  cbm;
-                cbm = CreateCompatibleBitmap(grwindow.gc, width, height);
-                Mask(img) = cbm;
-                oldBmp = SelectObject(grwindow.tempDC,Mask(img));
-                for (i = 0; i < height; i++) {
-                        for (j = 0; j < width; j++) {
-                                int col = Long_val (Field (Field (matrix, i), j));
-                                SetPixel(grwindow.tempDC,j, i, col == -1 ? 0xFFFFFF : 0);
-                        }
-                }
-                SelectObject(grwindow.tempDC,oldBmp);
-        }
-        return img;
 }
 
 static value alloc_int_vect(mlsize_t size)
@@ -480,7 +377,7 @@ CAMLprim value caml_gr_dump_image (value img)
         int width = Width(img);
         value matrix = Val_unit;
         int i, j;
-        HBITMAP oldBmp;
+//        void * oldBmp;
 
         Begin_roots2(img, matrix)
                 matrix = alloc_int_vect (height);
@@ -489,10 +386,10 @@ CAMLprim value caml_gr_dump_image (value img)
         }
         End_roots();
 
-        oldBmp = SelectObject(grwindow.tempDC,Data(img));
+//        oldBmp = SelectObject(grwindow.tempDC,Data(img));
         for (i = 0; i < height; i++) {
                 for (j = 0; j < width; j++) {
-                        int col = GetPixel(grwindow.tempDC,j, i);
+                        int col = MyGetPixel(j, i);
                         int blue = (col >> 16) & 0xFF;
                         int green = (col >> 8) & 0xFF;
                         int red = col & 0xFF;
@@ -500,17 +397,17 @@ CAMLprim value caml_gr_dump_image (value img)
                                         (green << 8) + blue);
                 }
         }
-        SelectObject(grwindow.tempDC,oldBmp);
+//        SelectObject(grwindow.tempDC,oldBmp);
         if (Mask(img) != NULL) {
-                oldBmp = SelectObject(grwindow.tempDC,Mask(img));
+//                oldBmp = SelectObject(grwindow.tempDC,Mask(img));
                 for (i = 0; i < height; i++) {
                         for (j = 0; j < width; j++) {
-                                if (GetPixel(grwindow.tempDC,j, i) != 0)
+                                if (MyGetPixel(j, i) != 0)
                                         Field(Field(matrix, i), j) =
                                                 Val_long(-1);
                         }
                 }
-                SelectObject(grwindow.tempDC,oldBmp);
+//                SelectObject(grwindow.tempDC,oldBmp);
         }
         return matrix;
 }

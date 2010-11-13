@@ -4,7 +4,7 @@
 #include "../../byterun/glue.h"
 #include "graphstubs.h"
 
-GR_WINDOW grwindow;
+//GR_WINDOW grwindow;
 char *window_name;
 
 struct camlsyms graph_camlsyms[] = {
@@ -38,7 +38,7 @@ struct camlsyms graph_camlsyms[] = {
 "caml_gr_create_image", caml_gr_create_image,
 "caml_gr_blit_image", caml_gr_blit_image,
 "caml_gr_draw_image", caml_gr_draw_image,
-"caml_gr_make_image", caml_gr_make_image,
+//"caml_gr_make_image", caml_gr_make_image,
 "caml_gr_dump_image", caml_gr_dump_image,
 "caml_gr_wait_event", caml_gr_wait_event,
 "caml_gr_clear_graph", caml_gr_clear_graph,
@@ -61,26 +61,7 @@ struct camlsyms graph_camlsyms[] = {
 enum {TEXT};
 static int movex, movey, mode, tcolour;
 static void *gc, *hsel;
-
-void myputs(const char *s, int ln)
-{
-	printf("%s at line %d\n", s, ln);
-}
-
-extern int AfficheBitmap(value arg1,  void * arg2,  int arg3,  int arg4) { 
-	myputs(__FILE__,__LINE__); return 0; }
-extern int Arc(void * arg1,  int arg2,  int arg3,  int arg4,  int arg5,  int arg6,  int arg7,  int arg8,  int arg9) { 
-	myputs(__FILE__,__LINE__); return 0; }
-extern int Beep(value arg1,  value arg2) { 
-	myputs(__FILE__,__LINE__); return 0; }
-extern int BitBlt(void * arg1,  int left ,  int bottom,  int right,  int top,  void * arg6,  int x ,  int y ,  int colour) { 
-	
-	return 0;
-}
-
-extern int CloseHandle(void *arg) { 
-	myputs(__FILE__,__LINE__); return 0; }
-
+#if 0
 extern HBRUSH CreateBrushIndirect(LOGBRUSH *arg) { 
 	HBRUSH brush = malloc(sizeof(LOGBRUSH));
 	memcpy(brush, arg, sizeof(LOGBRUSH));
@@ -95,9 +76,6 @@ extern void *CreateCompatibleDC(void *arg) {
 	return arg;
 }
 
-extern void *CreateEvent(void * arg1,  BOOL arg2,  BOOL arg3,  void *arg4) { 
-	myputs(__FILE__,__LINE__); return 0; }
-
 extern HPEN CreatePenIndirect(LOGPEN *arg) { 
 	HPEN pen = malloc(sizeof(LOGPEN));
 	memcpy(pen, arg, sizeof(LOGPEN));
@@ -108,40 +86,10 @@ extern HPEN CreatePen(int arg1,  int arg2,  int arg3) {
 	return calloc(1, sizeof(HPEN));
 }
 
-extern int DeleteDC(void *arg) { 
-	myputs(__FILE__,__LINE__); return 0; }
-
-extern int DeleteObject(void *arg) { 
-	return 0;
-}
-
-extern int Ellipse(void * arg1,  int arg2,  int arg3,  int arg4,  int arg5) { 
-	myputs(__FILE__,__LINE__); return 0; }
-extern int FillRect(void * arg1,  RECT * arg2,  void *arg3) { 
-	myputs(__FILE__,__LINE__); return 0; }
-
-extern int GetClientRect(HWND arg1,  RECT *arg2) {
-	arg2->left = 0;
-	arg2->right = 767;
-	arg2->top = 0;
-	arg2->bottom = 1023;
-	return 0;
-}
-
-extern int GetCursorPos(POINT *arg) { 
-	myputs(__FILE__,__LINE__); return 0; }
-
-extern void *GetDC(void *arg) { 
-	return arg;
-}
-
 extern int GetObject(void *arg1,  int arg2,  LOGPEN *arg3) { 
 	memcpy(arg3, arg1, arg2);
 	return 0;
 }
-
-extern int GetPixel(void * arg1,  int arg2,  int arg3) { 
-	myputs(__FILE__,__LINE__); return 0; }
 
 extern void *GetStockObject(int arg) { 
 	switch (arg) {
@@ -182,26 +130,11 @@ extern int GetSystemMetrics(int arg) {
 	}
 }
 
-extern int GetTextExtentPoint(void * arg1,  char * arg2,  int arg3,  SIZE *arg4) { 
-	myputs(__FILE__,__LINE__); return 0; }
-extern int LineTo(void * arg1,  int arg2,  int arg3) { 
-	myputs(__FILE__,__LINE__); return 0; }
-extern int MapWindowPoints(int arg1,  void *arg2,  POINT * arg3,  int arg4) { 
-	myputs(__FILE__,__LINE__); return 0; }
 extern int MoveToEx(HDC arg1,  int arg2,  int arg3,  void *arg4) { 
 	movex = arg2;
 	movey = arg3;
 	return 0;
 }
-
-extern int Pie(void * arg1,  int arg2,  int arg3,  int arg4,  int arg5,  int arg6,  int arg7,  int arg8,  int arg9) { 
-	myputs(__FILE__,__LINE__); return 0; }
-extern int Polygon(void * arg1,  POINT * arg2,  int arg3) { 
-	myputs(__FILE__,__LINE__); return 0; }
-extern int Polyline(void * arg1,  POINT * arg2,  int arg3) { 
-	myputs(__FILE__,__LINE__); return 0; }
-extern int PostMessage(void * arg1,  int arg2,  int arg3,  int arg4) { 
-	myputs(__FILE__,__LINE__); return 0; }
 
 extern COLORREF RGB(int arg1, int arg2, int arg3) { 
 	COLORREF ref;
@@ -216,23 +149,7 @@ extern void *SelectObject(void *arg1, void *arg2) {
 	hsel = arg2;
 	return arg2;
 }
-
-extern int SetBkMode(void * arg1,  int arg2) { 
-	myputs(__FILE__,__LINE__); return 0; }
-
-extern int SetMapMode(void * arg1,  int arg2) { 
-	switch (arg2) {
-		case MM_TEXT:
-			mode = TEXT ;
-			break;
-		default:
-			break;
-	}
-}
-
-extern int SetPixel(void * arg1,  int arg2,  int arg3,  int arg4) { 
-	myputs(__FILE__,__LINE__); return 0; }
-
+#endif
 extern int SetTextAlign(void * arg1,  int arg2) { 
 	
 }
@@ -240,13 +157,3 @@ extern int SetTextAlign(void * arg1,  int arg2) {
 extern int SetTextColor(void * arg1,  int arg2) { 
 	tcolour = arg2;
 }
-
-extern int SetWindowText(void *arg1,  char *arg2) { 
-	myputs(__FILE__,__LINE__); return 0; }
-extern int TextOut(void * arg1, int arg2, int arg3, char * arg4, int arg5) { 
-	myputs(__FILE__,__LINE__); return 0; }
-extern int WaitForSingleObject(void *arg1,  int arg2) { 
-	myputs(__FILE__,__LINE__); return 0; }
-
-extern int gr_open_graph_internal(value arg) { 
-	myputs(__FILE__,__LINE__); return 0; }
